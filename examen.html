@@ -1,0 +1,2036 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test Teórico DGT – Permiso B 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --dgt-red: #C8102E;
+    --dgt-red-dark: #9b0c22;
+    --dgt-red-light: #e8324c;
+    --dgt-yellow: #FFD100;
+    --dgt-yellow-dark: #e6b800;
+    --dgt-blue: #003DA5;
+    --dgt-blue-light: #1a52c4;
+    --dgt-white: #FFFFFF;
+    --dgt-gray: #f4f4f4;
+    --dgt-gray-mid: #e0e0e0;
+    --dgt-gray-dark: #555;
+    --dgt-text: #1a1a1a;
+    --success: #1a8a3c;
+    --success-bg: #d4edda;
+    --danger: #C8102E;
+    --danger-bg: #fde8eb;
+    --warning-bg: #fff3cd;
+    --font-head: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+    --shadow: 0 4px 20px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.18);
+    --radius: 12px;
+    --radius-sm: 6px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: var(--font-body);
+    background: #f0f2f5;
+    color: var(--dgt-text);
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─────────────────────────────── */
+  header {
+    background: var(--dgt-red);
+    color: white;
+    padding: 0;
+    box-shadow: var(--shadow-lg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    gap: 16px;
+  }
+  .logo-block {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .dgt-logo {
+    width: 52px;
+    height: 52px;
+    flex-shrink: 0;
+  }
+  .logo-text h1 {
+    font-family: var(--font-head);
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  .logo-text p {
+    font-size: 0.8rem;
+    opacity: 0.85;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .header-badge {
+    background: var(--dgt-yellow);
+    color: var(--dgt-red-dark);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  /* ─── MAIN WRAPPER ────────────────────────── */
+  .app {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 30px 20px 60px;
+  }
+
+  /* ─── CARDS ─────────────────────────────── */
+  .card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-header {
+    background: linear-gradient(135deg, var(--dgt-red), var(--dgt-red-dark));
+    color: white;
+    padding: 20px 28px;
+  }
+  .card-header h2 {
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .card-body {
+    padding: 28px;
+  }
+
+  /* ─── HOME SCREEN ─────────────────────────── */
+  /* ─── HOME SCREEN ─────────────────────────── */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 24px;
+  }
+  @media(max-width:600px){ .home-grid { grid-template-columns: 1fr; } }
+
+  .mode-card {
+    border: 2.5px solid var(--dgt-gray-mid);
+    border-radius: var(--radius);
+    padding: 24px 20px;
+    cursor: pointer;
+    transition: all .2s;
+    text-align: center;
+    background: white;
+  }
+  .mode-card:hover { border-color: var(--dgt-red); transform: translateY(-3px); box-shadow: var(--shadow); }
+  .mode-card.selected { border-color: var(--dgt-red); background: #fff5f6; }
+  .mode-card .icon { font-size: 2.6rem; margin-bottom: 10px; }
+  .mode-card h3 { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; color: var(--dgt-red); text-transform: uppercase; }
+  .mode-card p { font-size: 0.85rem; color: var(--dgt-gray-dark); margin-top: 6px; line-height: 1.5; }
+
+  .info-bar {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+  .info-chip {
+    background: var(--dgt-gray);
+    border-left: 4px solid var(--dgt-red);
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    flex: 1;
+    min-width: 160px;
+  }
+  .info-chip .label { font-size: 0.73rem; text-transform: uppercase; color: var(--dgt-gray-dark); letter-spacing: 0.5px; font-weight: 600; }
+  .info-chip .value { font-family: var(--font-head); font-size: 1.3rem; font-weight: 700; color: var(--dgt-red); margin-top: 2px; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    transition: all .2s;
+  }
+  .btn-primary { background: var(--dgt-red); color: white; }
+  .btn-primary:hover { background: var(--dgt-red-dark); transform: translateY(-1px); box-shadow: 0 4px 16px rgba(200,16,46,.35); }
+  .btn-secondary { background: var(--dgt-blue); color: white; }
+  .btn-secondary:hover { background: var(--dgt-blue-light); }
+  .btn-yellow { background: var(--dgt-yellow); color: var(--dgt-red-dark); }
+  .btn-yellow:hover { background: var(--dgt-yellow-dark); }
+  .btn-outline { background: transparent; border: 2px solid var(--dgt-red); color: var(--dgt-red); }
+  .btn-outline:hover { background: var(--dgt-red); color: white; }
+  .btn-sm { padding: 9px 20px; font-size: 0.9rem; }
+  .btn:disabled { opacity: .5; cursor: not-allowed; transform: none; }
+
+  /* ─── EXAM HEADER BAR ─────────────────────── */
+  /* ─── EXAM HEADER BAR ─────────────────────── */
+  .exam-topbar {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 16px 24px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .progress-wrap { flex: 1; min-width: 140px; }
+  .progress-label { font-size: 0.8rem; color: var(--dgt-gray-dark); font-weight: 600; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .progress-bar { height: 8px; background: var(--dgt-gray-mid); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--dgt-red); border-radius: 4px; transition: width .3s; }
+
+  .stat-pill {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    font-family: var(--font-head);
+    font-size: 1rem;
+  }
+  .stat-pill.correct { background: var(--success-bg); color: var(--success); }
+  .stat-pill.wrong { background: var(--danger-bg); color: var(--danger); }
+  .stat-pill.timer { background: #e8f0ff; color: var(--dgt-blue); }
+  .stat-pill.timer.urgent { background: var(--danger-bg); color: var(--danger); animation: pulse 1s infinite; }
+  @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:.6 } }
+
+  /* ─── QUESTION CARD ─────────────────────────── */
+  .question-card {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+  .q-header {
+    background: linear-gradient(90deg, var(--dgt-red) 0%, #a00920 100%);
+    color: white;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .q-num { font-family: var(--font-head); font-size: 1rem; font-weight: 600; opacity: .85; text-transform: uppercase; letter-spacing: .5px; }
+  .q-category {
+    background: rgba(255,255,255,.18);
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+  .q-body { padding: 24px; }
+  .q-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: var(--dgt-text);
+  }
+  .q-image {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .q-image svg { max-width: 160px; height: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,.12)); }
+  .q-image .img-caption { font-size: 0.78rem; color: var(--dgt-gray-dark); margin-top: 6px; font-style: italic; }
+
+  /* ─── OPTIONS ─────────────────────────────── */
+  .options { display: flex; flex-direction: column; gap: 12px; }
+  .option {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    border: 2px solid var(--dgt-gray-mid);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: all .15s;
+    user-select: none;
+  }
+  .option:hover:not(.disabled) { border-color: var(--dgt-red); background: #fff5f6; }
+  .option.selected { border-color: var(--dgt-blue); background: #f0f5ff; }
+  .option.correct { border-color: var(--success); background: var(--success-bg) !important; }
+  .option.wrong { border-color: var(--danger); background: var(--danger-bg) !important; }
+  .option.show-correct { border-color: var(--success); background: var(--success-bg) !important; }
+  .option.disabled { cursor: default; }
+  .opt-letter {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--dgt-gray-mid);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
+    transition: all .15s;
+  }
+  .option.selected .opt-letter { background: var(--dgt-blue); color: white; }
+  .option.correct .opt-letter { background: var(--success); color: white; }
+  .option.wrong .opt-letter { background: var(--danger); color: white; }
+  .option.show-correct .opt-letter { background: var(--success); color: white; }
+  .opt-text { font-size: 0.98rem; line-height: 1.4; }
+
+  /* ─── FEEDBACK / TUTOR ─────────────────────── */
+  .feedback-box {
+    margin-top: 20px;
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+    display: none;
+    animation: fadeIn .3s ease;
+  }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:none} }
+  .feedback-box.correct { background: var(--success-bg); border-left: 5px solid var(--success); }
+  .feedback-box.wrong { background: var(--danger-bg); border-left: 5px solid var(--danger); }
+  .feedback-title {
+    font-family: var(--font-head);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .feedback-box.correct .feedback-title { color: var(--success); }
+  .feedback-box.wrong .feedback-title { color: var(--danger); }
+  .feedback-text { font-size: 0.92rem; line-height: 1.6; color: #333; }
+  .ref-image-wrap {
+    margin-top: 14px;
+    padding: 12px;
+    background: white;
+    border-radius: var(--radius-sm);
+    border: 1.5px solid var(--dgt-gray-mid);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .ref-image-wrap svg { max-width: 80px; flex-shrink: 0; }
+  .ref-image-text { font-size: 0.85rem; color: #444; line-height: 1.5; }
+  .ref-image-text strong { color: var(--dgt-red); }
+
+  /* ─── NAV BUTTONS ─────────────────────────── */
+  .q-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--dgt-gray);
+    border-top: 1px solid var(--dgt-gray-mid);
+  }
+
+  /* ─── RESULTS SCREEN ─────────────────────── */
+  /* ─── RESULTS SCREEN ─────────────────────── */
+  .result-hero {
+    text-align: center;
+    padding: 40px 28px 28px;
+  }
+  .result-badge {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin: 0 auto 20px;
+  }
+  .result-badge.pass { background: var(--success-bg); border: 4px solid var(--success); }
+  .result-badge.fail { background: var(--danger-bg); border: 4px solid var(--danger); }
+  .result-title {
+    font-family: var(--font-head);
+    font-size: 2.4rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .result-title.pass { color: var(--success); }
+  .result-title.fail { color: var(--danger); }
+  .result-subtitle { color: var(--dgt-gray-dark); font-size: 1.0rem; margin-top: 8px; }
+  .result-stats {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 16px;
+    padding: 0 28px 28px;
+  }
+  @media(max-width:500px){ .result-stats { grid-template-columns: 1fr 1fr; } }
+  .result-stat {
+    background: var(--dgt-gray);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+  }
+  .result-stat .rs-val { font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--dgt-red); }
+  .result-stat .rs-label { font-size: 0.8rem; color: var(--dgt-gray-dark); text-transform: uppercase; letter-spacing: .4px; margin-top: 2px; font-weight: 600; }
+
+  .review-section { padding: 0 28px 28px; }
+  .review-section h3 { font-family: var(--font-head); font-size: 1.2rem; font-weight: 700; text-transform: uppercase; color: var(--dgt-red); margin-bottom: 14px; letter-spacing: .5px; border-bottom: 2px solid var(--dgt-red); padding-bottom: 8px; }
+  .review-item {
+    background: var(--danger-bg);
+    border-left: 4px solid var(--danger);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-bottom: 12px;
+  }
+  .review-item.skipped { background: var(--warning-bg); border-color: #e6b800; }
+  .ri-question { font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; }
+  .ri-your { color: var(--danger); font-size: 0.87rem; margin-bottom: 3px; }
+  .ri-correct { color: var(--success); font-size: 0.87rem; font-weight: 600; margin-bottom: 8px; }
+  .ri-explain { font-size: 0.87rem; color: #444; line-height: 1.5; padding-top: 8px; border-top: 1px solid rgba(0,0,0,.08); }
+
+  .result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; padding: 0 28px 28px; }
+
+  /* ─── SCREENS ─────────────────────────────── */
+  .screen { display: none; }
+  .screen.active { 
+    display: block !important; 
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+
+  .sep { height: 1px; background: var(--dgt-gray-mid); margin: 20px 0; }
+
+  .exam-type-selector {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .exam-type-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 20px;
+    border: 2px solid var(--dgt-gray-mid);
+    border-radius: var(--radius-sm);
+    background: white;
+    cursor: pointer;
+    font-family: var(--font-head);
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    text-align: center;
+    transition: all .2s;
+    color: var(--dgt-gray-dark);
+  }
+  .exam-type-btn:hover, .exam-type-btn.active { background: var(--dgt-red); color: white; border-color: var(--dgt-red); }
+
+  .warning-strip {
+    background: var(--warning-bg);
+    border-left: 4px solid var(--dgt-yellow-dark);
+    padding: 10px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    color: #555;
+    margin-top: 16px;
+    line-height: 1.5;
+  }
+  .warning-strip strong { color: var(--dgt-red-dark); }
+
+  footer {
+    text-align: center;
+    padding: 28px 20px;
+    color: #888;
+    font-size: 0.82rem;
+    border-top: 1px solid var(--dgt-gray-mid);
+    margin-top: 40px;
+  }
+
+  /* Tutor mode badge */
+  .tutor-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--dgt-blue);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: .3px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo-block">
+      <!-- DGT Logo SVG -->
+      <svg class="dgt-logo" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="48" fill="#fff" stroke="#C8102E" stroke-width="4"/>
+        <text x="50" y="46" font-family="Arial Black,sans-serif" font-weight="900" font-size="22" fill="#C8102E" text-anchor="middle">DGT</text>
+        <text x="50" y="65" font-family="Arial,sans-serif" font-size="9" fill="#003DA5" text-anchor="middle" font-weight="600">ESPAÑA</text>
+        <rect x="20" y="70" width="60" height="4" rx="2" fill="#C8102E"/>
+      </svg>
+      <div class="logo-text">
+        <h1>Test DGT · Permiso B</h1>
+        <p>Simulador Oficial · Actualizado 2025/2026</p>
+      </div>
+    </div>
+    <div class="header-badge">🚗 Carnet B</div>
+  </div>
+</header>
+
+<div class="app">
+
+  <!-- ════════════════ PANTALLA INICIO ════════════════ -->
+  <div id="screen-home" class="screen active">
+    <div class="card" style="margin-top:20px">
+      <div class="card-header">
+        <h2>📋 Elige tu modo de práctica</h2>
+      </div>
+      <div class="card-body">
+        <div class="home-grid">
+          <div class="mode-card selected" data-mode="exam" onclick="selectMode('exam')">
+            <div class="icon">⏱️</div>
+            <h3>Examen Oficial</h3>
+            <p>30 preguntas · 30 minutos · Máximo 3 fallos. Igual que el examen DGT real.</p>
+          </div>
+          <div class="mode-card" data-mode="tutor" onclick="selectMode('tutor')">
+            <div class="icon">🎓</div>
+            <h3>Modo Tutor</h3>
+            <p>Sin tiempo. Explicación inmediata tras cada respuesta. Ideal para aprender.</p>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <p style="font-weight:600;font-size:.95rem;margin-bottom:12px">Tipo de examen:</p>
+        <div class="exam-type-selector">
+          <button class="exam-type-btn active" data-type="full" onclick="selectType('full',this)">🎲 Aleatorio</button>
+          <button class="exam-type-btn" data-type="signals" onclick="selectType('signals',this)">🚦 Señales</button>
+          <button class="exam-type-btn" data-type="normas" onclick="selectType('normas',this)">📖 Normas</button>
+          <button class="exam-type-btn" data-type="mecanica" onclick="selectType('mecanica',this)">🔧 Mecánica</button>
+          <button class="exam-type-btn" data-type="alcohol" onclick="selectType('alcohol',this)">🍷 Alcohol/Drogas</button>
+        </div>
+
+        <div class="info-bar">
+          <div class="info-chip"><div class="label">Preguntas</div><div class="value">30 por examen</div></div>
+          <div class="info-chip"><div class="label">Tiempo</div><div class="value">30 minutos</div></div>
+          <div class="info-chip"><div class="label">Fallos permitidos</div><div class="value">Máx. 3</div></div>
+          <div class="info-chip"><div class="label">Banco total</div><div class="value" id="bank-count">–</div></div>
+        </div>
+
+        <div class="warning-strip">
+          ⚡ <strong>Actualizado oct. 2025/2026:</strong> Incluye las nuevas señales del catálogo DGT (julio 2025), VMP, Zonas de Bajas Emisiones y preguntas de percepción del riesgo.
+        </div>
+
+        <div style="text-align:center;margin-top:28px">
+          <button class="btn btn-primary" onclick="startExam()">🚀 Empezar examen</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ PANTALLA EXAMEN ════════════════ -->
+  <div id="screen-exam" class="screen">
+    <div class="exam-topbar">
+      <div class="progress-wrap">
+        <div class="progress-label">Pregunta <span id="q-current">1</span> de 30</div>
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill" style="width:3.3%"></div></div>
+      </div>
+      <div class="stat-pill correct">✅ <span id="correct-count">0</span> aciertos</div>
+      <div class="stat-pill wrong">❌ <span id="wrong-count">0</span> fallos</div>
+      <div class="stat-pill timer" id="timer-pill">⏱ <span id="timer-display">30:00</span></div>
+      <button class="btn btn-outline btn-sm" onclick="abandonExam()">🏳 Abandonar</button>
+    </div>
+
+    <div class="question-card" id="question-card">
+      <div class="q-header">
+        <span class="q-num" id="q-label">Pregunta 1</span>
+        <span class="q-category" id="q-cat">Señales</span>
+      </div>
+      <div class="q-body">
+        <div class="q-image" id="q-image-wrap" style="display:none">
+          <div id="q-image"></div>
+          <div class="img-caption" id="q-image-caption"></div>
+        </div>
+        <div class="q-text" id="q-text"></div>
+        <div class="options" id="options-list"></div>
+        <div class="feedback-box" id="feedback-box">
+          <div class="feedback-title" id="fb-title"></div>
+          <div class="feedback-text" id="fb-text"></div>
+          <div id="fb-ref-image" style="display:none">
+            <div class="ref-image-wrap">
+              <div id="fb-ref-svg"></div>
+              <div class="ref-image-text" id="fb-ref-text"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="q-nav">
+        <button class="btn btn-outline btn-sm" onclick="skipQuestion()" id="btn-skip">⏭ Saltar</button>
+        <div style="display:flex;gap:10px">
+          <button class="btn btn-primary btn-sm" onclick="confirmAnswer()" id="btn-confirm" disabled>✔ Confirmar</button>
+          <button class="btn btn-secondary btn-sm" onclick="nextQuestion()" id="btn-next" style="display:none">Siguiente →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════════════ PANTALLA RESULTADOS ════════════════ -->
+  <div id="screen-results" class="screen">
+    <div class="card">
+      <div class="result-hero">
+        <div class="result-badge" id="res-badge">🎉</div>
+        <div class="result-title" id="res-title">APROBADO</div>
+        <div class="result-subtitle" id="res-subtitle"></div>
+      </div>
+      <div class="result-stats">
+        <div class="result-stat"><div class="rs-val" id="rs-correct">0</div><div class="rs-label">Aciertos</div></div>
+        <div class="result-stat"><div class="rs-val" id="rs-wrong">0</div><div class="rs-label">Fallos</div></div>
+        <div class="result-stat"><div class="rs-val" id="rs-skipped">0</div><div class="rs-label">Sin contestar</div></div>
+        <div class="result-stat"><div class="rs-val" id="rs-pct">0%</div><div class="rs-label">Porcentaje</div></div>
+        <div class="result-stat"><div class="rs-val" id="rs-time">–</div><div class="rs-label">Tiempo usado</div></div>
+        <div class="result-stat"><div class="rs-val" id="rs-streak">0</div><div class="rs-label">Racha máx.</div></div>
+      </div>
+      <div class="review-section" id="review-section">
+        <h3>📚 Repaso de errores y sin responder</h3>
+        <div id="review-list"></div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" onclick="startExam()">🔄 Nuevo examen</button>
+        <button class="btn btn-secondary" onclick="showHome()">🏠 Inicio</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end .app -->
+
+<footer>
+  Simulador no oficial · Basado en el temario oficial DGT y actualización de señales 2025/2026 · Solo para práctica
+</footer>
+
+<script>
+// ══════════════════════════════════════════════════
+//   SISTEMA DE LOGS Y DEPURACIÓN
+// ══════════════════════════════════════════════════
+const Log = {
+  info: (msg) => console.log(`%c[INFO] ${new Date().toLocaleTimeString()}: ${msg}`, 'color: #003DA5; font-weight: bold;'),
+  error: (msg, err) => console.error(`%c[ERROR] ${new Date().toLocaleTimeString()}: ${msg}`, 'color: #C8102E; font-weight: bold;', err),
+  warn: (msg) => console.warn(`%c[WARN] ${new Date().toLocaleTimeString()}: ${msg}`, 'color: #e6b800; font-weight: bold;')
+};
+
+Log.info("Iniciando carga de scripts...");
+
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+  Log.error(`Error global detectado: ${msg} en ${url}:${lineNo}:${columnNo}`, error);
+  return false;
+};
+
+// ══════════════════════════════════════════════════
+//   SVG HELPERS — señales como SVG inline
+// ══════════════════════════════════════════════════
+const SVG = {
+  // Señal de peligro (triángulo rojo)
+  danger: (inner='', label='') => `<svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="60,8 112,102 8,102" fill="white" stroke="#C8102E" stroke-width="8" stroke-linejoin="round"/>
+    ${inner}
+    <title>${label}</title>
+  </svg>`,
+  // Señal prohibición (círculo rojo)
+  prohib: (inner='', label='') => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="white" stroke="#C8102E" stroke-width="9"/>
+    <line x1="84" y1="25" x2="36" y2="95" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/>
+    ${inner}
+    <title>${label}</title>
+  </svg>`,
+  // Señal obligación (círculo azul)
+  oblig: (inner='', label='') => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="#003DA5"/>
+    ${inner}
+    <title>${label}</title>
+  </svg>`,
+  // Señal info (rectángulo azul)
+  info: (inner='', label='') => `<svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="152" height="82" rx="8" fill="#003DA5" stroke="#fff" stroke-width="4"/>
+    ${inner}
+    <title>${label}</title>
+  </svg>`,
+  // Señal stop (octógono)
+  stop: () => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="35,8 85,8 112,35 112,85 85,112 35,112 8,85 8,35" fill="#C8102E" stroke="#C8102E" stroke-width="2"/>
+    <text x="60" y="72" font-family="Arial Black" font-size="28" fill="white" font-weight="900" text-anchor="middle">STOP</text>
+  </svg>`,
+  // Ceda el paso
+  ceda: () => `<svg viewBox="0 0 120 110" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="60,102 8,8 112,8" fill="white" stroke="#C8102E" stroke-width="9" stroke-linejoin="round"/>
+    <polygon points="60,88 22,20 98,20" fill="none" stroke="#C8102E" stroke-width="4" stroke-linejoin="round"/>
+  </svg>`,
+  // Velocidad máx
+  speed: (n) => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="white" stroke="#C8102E" stroke-width="9"/>
+    <text x="60" y="76" font-family="Arial Black" font-size="36" fill="#1a1a1a" font-weight="900" text-anchor="middle">${n}</text>
+  </svg>`,
+  // Velocidad min
+  speedMin: (n) => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="#003DA5"/>
+    <text x="60" y="76" font-family="Arial Black" font-size="36" fill="white" font-weight="900" text-anchor="middle">${n}</text>
+  </svg>`,
+  // Fin de velocidad
+  endSpeed: (n) => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="white" stroke="#888" stroke-width="5" stroke-dasharray="10 6"/>
+    <text x="60" y="76" font-family="Arial Black" font-size="36" fill="#888" font-weight="900" text-anchor="middle">${n}</text>
+    <line x1="30" y1="85" x2="90" y2="35" stroke="#888" stroke-width="5"/>
+  </svg>`,
+  // Flecha dirección obligatoria
+  arrow: (dir='up') => {
+    const arrows = { up:'M60,90 L60,30 M45,45 L60,30 L75,45', left:'M90,60 L30,60 M45,45 L30,60 L45,75', right:'M30,60 L90,60 M75,45 L90,60 L75,75' };
+    return SVG.oblig(`<path d="${arrows[dir]||arrows.up}" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`, 'Dirección obligatoria');
+  },
+  // Glorieta
+  roundabout: () => SVG.oblig(`<path d="M60,30 A30,30 0 1,1 30,60" stroke="white" stroke-width="8" fill="none" stroke-linecap="round"/><polygon points="30,60 20,50 30,45" fill="white"/>`, 'Glorieta'),
+  // Adelantar prohibido
+  noOvertake: () => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="white" stroke="#C8102E" stroke-width="9"/>
+    <ellipse cx="46" cy="65" rx="14" ry="20" fill="#333"/>
+    <ellipse cx="68" cy="65" rx="14" ry="20" fill="#C0C0C0"/>
+    <line x1="84" y1="25" x2="36" y2="95" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/>
+  </svg>`,
+  // Fin de prohibición de adelantamiento
+  endOvertake: () => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="white" stroke="#888" stroke-width="5" stroke-dasharray="10 6"/>
+    <ellipse cx="46" cy="65" rx="14" ry="20" fill="#333"/>
+    <ellipse cx="68" cy="65" rx="14" ry="20" fill="#C0C0C0"/>
+    <line x1="84" y1="25" x2="36" y2="95" stroke="#888" stroke-width="5"/>
+  </svg>`,
+  // Peatones
+  pedestrians: () => SVG.danger(`<circle cx="60" cy="42" r="7" fill="#1a1a1a"/><line x1="60" y1="49" x2="60" y2="72" stroke="#1a1a1a" stroke-width="5"/><line x1="46" y1="60" x2="74" y2="60" stroke="#1a1a1a" stroke-width="5"/><line x1="60" y1="72" x2="48" y2="90" stroke="#1a1a1a" stroke-width="5"/><line x1="60" y1="72" x2="72" y2="90" stroke="#1a1a1a" stroke-width="5"/>`, 'Peligro peatones'),
+  // Intersección
+  intersection: () => SVG.danger(`<line x1="60" y1="38" x2="60" y2="90" stroke="#1a1a1a" stroke-width="6"/><line x1="38" y1="64" x2="82" y2="64" stroke="#1a1a1a" stroke-width="6"/>`, 'Intersección'),
+  // Curva
+  curve: (dir='right') => SVG.danger(`<path d="M55,85 Q${dir==='right'?'55,50 75,38':'55,50 45,38'}" stroke="#1a1a1a" stroke-width="7" fill="none" stroke-linecap="round"/>`, 'Curva'),
+  // Paso a nivel
+  railroad: () => SVG.danger(`<line x1="45" y1="40" x2="75" y2="90" stroke="#1a1a1a" stroke-width="6"/><line x1="75" y1="40" x2="45" y2="90" stroke="#1a1a1a" stroke-width="6"/>`, 'Paso a nivel'),
+  // Obras
+  works: () => SVG.danger(`<text x="60" y="88" font-family="Arial" font-size="46" text-anchor="middle" fill="#FFA500">⚠</text>`, 'Obras'),
+  // Patinete VMP
+  vmp: () => `<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="60" cy="60" r="56" fill="white" stroke="#C8102E" stroke-width="9"/>
+    <circle cx="38" cy="80" r="10" fill="none" stroke="#1a1a1a" stroke-width="4"/>
+    <circle cx="82" cy="80" r="10" fill="none" stroke="#1a1a1a" stroke-width="4"/>
+    <line x1="38" y1="70" x2="60" y2="50" stroke="#1a1a1a" stroke-width="4"/>
+    <line x1="60" y1="50" x2="82" y2="70" stroke="#1a1a1a" stroke-width="4"/>
+    <line x1="60" y1="50" x2="60" y2="35" stroke="#1a1a1a" stroke-width="4"/>
+    <line x1="52" y1="35" x2="68" y2="35" stroke="#1a1a1a" stroke-width="4"/>
+    <line x1="84" y1="25" x2="36" y2="95" stroke="#C8102E" stroke-width="9" stroke-linecap="round"/>
+  </svg>`,
+  // ZBE
+  zbe: () => `<svg viewBox="0 0 160 90" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="152" height="82" rx="8" fill="#009a44" stroke="#fff" stroke-width="4"/>
+    <text x="80" y="52" font-family="Arial Black" font-size="26" fill="white" font-weight="900" text-anchor="middle">ZBE</text>
+    <text x="80" y="72" font-family="Arial" font-size="12" fill="white" text-anchor="middle">Zona Bajas Emisiones</text>
+  </svg>`,
+  // Paso de cebra
+  zebra: () => `<svg viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+    <rect x="4" y="4" width="112" height="82" rx="4" fill="#003DA5"/>
+    <rect x="14" y="14" width="14" height="62" rx="2" fill="white"/>
+    <rect x="38" y="14" width="14" height="62" rx="2" fill="white"/>
+    <rect x="62" y="14" width="14" height="62" rx="2" fill="white"/>
+    <rect x="86" y="14" width="14" height="62" rx="2" fill="white"/>
+  </svg>`,
+};
+
+// ══════════════════════════════════════════════════
+//   BANCO DE PREGUNTAS
+// ══════════════════════════════════════════════════
+const QUESTIONS = [
+  // ── SEÑALES ────────────────────────────────────
+  {
+    id:1, cat:"Señales", img: SVG.speed(50),
+    q: "¿Qué indica esta señal circular roja con el número 50 en su interior?",
+    opts:["Velocidad mínima obligatoria de 50 km/h","Velocidad máxima permitida de 50 km/h","Velocidad recomendada de 50 km/h"],
+    ans:1,
+    explain:"La señal circular con borde rojo y número en su interior indica la velocidad MÁXIMA permitida. Las señales de velocidad MÍNIMA son círculos azules, y la RECOMENDADA son señales informativas rectangulares con fondo blanco.",
+    refSvg: SVG.speed(50), refText:"<strong>R-301 Velocidad máxima:</strong> Círculo rojo, fondo blanco. Indica el límite que no debes superar. No confundir con la señal azul (velocidad mínima)."
+  },
+  {
+    id:2, cat:"Señales", img: SVG.speedMin(60),
+    q: "¿Qué indica esta señal circular azul con el número 60?",
+    opts:["Velocidad máxima recomendada de 60 km/h","Velocidad mínima obligatoria de 60 km/h","Fin de limitación de velocidad a 60 km/h"],
+    ans:1,
+    explain:"La señal circular azul con número indica la VELOCIDAD MÍNIMA obligatoria. Debes circular al menos a esa velocidad. En cambio, el círculo rojo indica la velocidad máxima.",
+    refSvg: SVG.speedMin(60), refText:"<strong>R-411 Velocidad mínima:</strong> Círculo azul con número. Obliga a no circular por debajo de esa velocidad. Si no puedes mantenerla, debes abandonar la vía."
+  },
+  {
+    id:3, cat:"Señales", img: SVG.stop(),
+    q: "¿Ante esta señal, qué debes hacer?",
+    opts:["Reducir la velocidad y ceder el paso si hay vehículos","Detenerte obligatoriamente aunque no haya tráfico","Detenerte solo si hay vehículos o peatones que obstaculicen"],
+    ans:1,
+    explain:"La señal STOP (R-2) obliga a detenerse COMPLETAMENTE (velocidad cero) antes de la línea de parada, aunque no haya otros vehículos. Después de detenerse, se cede el paso. No cumplir es una infracción grave.",
+    refSvg: SVG.stop(), refText:"<strong>R-2 STOP:</strong> Octógono rojo. Detención obligatoria e imperativa. La detención debe ser real (0 km/h), no solo una reducción de velocidad."
+  },
+  {
+    id:4, cat:"Señales", img: SVG.ceda(),
+    q: "¿Qué indica la señal de 'Ceda el paso'?",
+    opts:["Debes detenerte completamente antes de la línea","Debes ceder el paso a los vehículos de la vía a la que accedes, pudiendo no detenerte si no es necesario","Solo debes ceder el paso si hay peatones"],
+    ans:1,
+    explain:"La señal Ceda el Paso (R-1) obliga a ceder el paso a los vehículos que circulan por la vía a la que te incorporas. A diferencia del STOP, no exige detención obligatoria si no hay tráfico, aunque puedes pararte si es necesario.",
+    refSvg: SVG.ceda(), refText:"<strong>R-1 Ceda el paso:</strong> Triángulo invertido. Debes ceder el paso, pero si la vía está libre puedes continuar sin detenerte. Diferente al STOP que siempre exige parada total."
+  },
+  {
+    id:5, cat:"Señales", img: SVG.noOvertake(),
+    q: "¿Qué prohíbe esta señal?",
+    opts:["Está prohibido el paso de vehículos de carga","Está prohibido adelantar a vehículos de motor","Está prohibido circular a más de dos vehículos en paralelo"],
+    ans:1,
+    explain:"La señal R-305 prohíbe el adelantamiento entre vehículos de motor. Solo afecta a vehículos de motor, no a ciclistas adelantando ciclistas. La prohibición termina con la señal R-502 (fin de prohibición de adelantar) o al final de la vía.",
+    refSvg: SVG.noOvertake(), refText:"<strong>R-305 Prohibido adelantar:</strong> Dos coches, uno negro y otro gris. Prohíbe adelantar vehículos de motor. No confundir con R-307 (solo prohíbe a camiones adelantar)."
+  },
+  {
+    id:6, cat:"Señales", img: SVG.endOvertake(),
+    q: "Esta señal con borde discontinuo gris indica:",
+    opts:["Sigue prohibido adelantar hasta nueva señal","Fin de la prohibición de adelantamiento","Zona de adelantamiento obligatorio"],
+    ans:1,
+    explain:"La señal R-502 (fin de prohibición de adelantamiento) tiene el mismo diseño que la R-305 pero con líneas discontinuas grises. Indica que termina la prohibición de adelantar establecida anteriormente.",
+    refSvg: SVG.endOvertake(), refText:"<strong>R-502 Fin prohibición de adelantar:</strong> Igual diseño que R-305 pero en gris/discontinuo. Señal fin de restricción. Siempre que ves este estilo discontinuo gris indica que termina una prohibición."
+  },
+  {
+    id:7, cat:"Señales", img: SVG.roundabout(),
+    q: "¿Qué indica esta señal azul circular con flecha giratoria?",
+    opts:["Sentido único obligatorio a la izquierda","Paso obligatorio por glorieta, circulación en sentido antihorario","Zona de giro permitido"],
+    ans:1,
+    explain:"La señal R-402 indica que debes entrar en la glorieta y circular en sentido antihorario (en España). Al entrar en una glorieta tienes preferencia sobre los que entran, pero cedes el paso a los que ya están circulando dentro.",
+    refSvg: SVG.roundabout(), refText:"<strong>R-402 Glorieta:</strong> Flecha circular antihoraria sobre fondo azul. Recuerda: los vehículos que ya están en la glorieta tienen prioridad sobre los que entran."
+  },
+  {
+    id:8, cat:"Señales", img: SVG.pedestrians(),
+    q: "¿Qué advierte esta señal triangular?",
+    opts:["Zona escolar obligatoria","Peligro: paso de peatones o zona frecuentada por peatones","Prohibido el paso a peatones"],
+    ans:1,
+    explain:"El triángulo rojo con figura humana (P-20) advierte de peligro por presencia de peatones. Es una señal de peligro, no prohibición. Debes reducir velocidad y extremar la precaución.",
+    refSvg: SVG.pedestrians(), refText:"<strong>P-20 Peligro peatones:</strong> Triángulo con figura humana. Señal de peligro (no prohibición). Muy frecuente cerca de colegios, mercados y zonas urbanas concurridas."
+  },
+  {
+    id:9, cat:"Señales", img: SVG.railroad(),
+    q: "¿Qué indica esta señal triangular con dos líneas cruzadas (aspas)?",
+    opts:["Intersección peligrosa a la derecha","Proximidad de un paso a nivel sin barreras","Zona de obras en la calzada"],
+    ans:1,
+    explain:"Las aspas (X) en triángulo rojo indican un paso a nivel sin barreras (P-7a). Debes reducir velocidad, mirar a ambos lados y asegurarte de que no viene ningún tren antes de cruzar.",
+    refSvg: SVG.railroad(), refText:"<strong>P-7a Paso a nivel sin barreras:</strong> Las aspas (aspas de San Andrés) simbolizan las vías del tren. Sin barreras = máxima precaución. Si hay barreras o semibarreras, hay señales específicas."
+  },
+  {
+    id:10, cat:"Señales", img: SVG.vmp(),
+    q: "¿Qué indica esta señal circular roja con figura de patinete tachada?",
+    opts:["Prohibido el acceso a vehículos de movilidad personal (VMP)","Permitido el acceso solo a patinetes eléctricos","Zona de uso exclusivo para VMP"],
+    ans:0,
+    explain:"Esta nueva señal del catálogo 2025 (R-115) prohíbe el acceso a Vehículos de Movilidad Personal (VMP) como patinetes eléctricos. Es una de las novedades incluidas en el examen desde octubre 2025.",
+    refSvg: SVG.vmp(), refText:"<strong>R-115 Prohibido VMP (nuevo 2025):</strong> Señal de prohibición (círculo rojo) con silueta de patinete. Nueva desde la reforma del catálogo de julio 2025. El examen ya la incluye desde octubre 2025."
+  },
+  {
+    id:11, cat:"Señales", img: SVG.zbe(),
+    q: "¿Qué indica una señal verde rectangular con las siglas 'ZBE'?",
+    opts:["Zona de Baja Emisiones: pueden acceder todos los vehículos sin restricción","Zona de Bajas Emisiones: acceso restringido según la etiqueta medioambiental del vehículo","Zona especial para vehículos eléctricos únicamente"],
+    ans:1,
+    explain:"Las ZBE (Zonas de Bajas Emisiones) restringen el acceso según la etiqueta ambiental DGT del vehículo: 0 emisiones (verde), ECO (verde/azul), C (verde), B (amarillo). Los vehículos sin etiqueta o con etiqueta B pueden tener acceso restringido según el municipio.",
+    refSvg: SVG.zbe(), refText:"<strong>ZBE Zona Bajas Emisiones:</strong> Nueva señalización 2025. El acceso depende de la etiqueta ambiental DGT de tu vehículo. Vehículos más contaminantes pueden tener restricciones en determinados horarios."
+  },
+  {
+    id:12, cat:"Señales", img: SVG.zebra(),
+    q: "¿Qué significa el paso de cebra (marcas longitudinales blancas sobre la calzada)?",
+    opts:["El peatón siempre tiene prioridad absoluta, debes detenerte aunque estés muy cerca","El conductor tiene preferencia si ya ha iniciado la maniobra antes de que el peatón pise","El conductor debe ceder el paso al peatón que está en el paso o en disposición de usarlo"],
+    ans:2,
+    explain:"En un paso de cebra, el conductor debe ceder el paso a los peatones que ya estén cruzando O que estén en disposición manifiesta de cruzar (es decir, esperando en el bordillo para entrar). Si el peatón aún no ha bajado del bordillo ni muestra intención de cruzar, no tiene prioridad obligatoria.",
+    refSvg: SVG.zebra(), refText:"<strong>Paso de cebra:</strong> Cedes al peatón que está cruzando o va a cruzar. La clave legal es 'disposición manifiesta de cruzar'. Si el peatón está mirando el móvil de espaldas al paso, la situación es ambigua pero sigue siendo prudente ceder."
+  },
+  {
+    id:13, cat:"Señales", img: SVG.arrow('up'),
+    q: "¿Qué indica la señal circular azul con flecha hacia arriba?",
+    opts:["Prohibido girar a la izquierda","Dirección obligatoria: solo puedes continuar recto","Autovía de sentido único"],
+    ans:1,
+    explain:"La señal R-400a (flecha recto) indica que solo puedes circular en la dirección indicada. Las señales de obligación son círculos azules. Una flecha hacia arriba significa continuar recto obligatoriamente.",
+    refSvg: SVG.arrow('up'), refText:"<strong>R-400 Dirección obligatoria:</strong> Círculo azul con flecha. Obliga a seguir la dirección indicada. Existen variantes: recto, derecha, izquierda y sus combinaciones."
+  },
+  {
+    id:14, cat:"Señales", img: SVG.endSpeed(80),
+    q: "¿Qué indica esta señal con el número 80 tachado diagonalmente y borde discontinuo?",
+    opts:["Velocidad máxima de 80 km/h con aviso de fin","Fin de la limitación de velocidad a 80 km/h","Reducción obligatoria de velocidad a 80 km/h"],
+    ans:1,
+    explain:"Las señales con línea diagonal y borde discontinuo gris son señales de FIN de restricción. En este caso indica que termina la limitación de velocidad a 80 km/h. Tras esta señal, rige el límite genérico de la vía.",
+    refSvg: SVG.endSpeed(80), refText:"<strong>R-500 Fin de limitación de velocidad:</strong> Diseño en gris/tachado. Tras esta señal rige el límite general de la vía (normalmente 90 km/h en carretera convencional, 120 km/h en autopista)."
+  },
+  {
+    id:15, cat:"Señales",
+    q: "¿Cuál es la diferencia entre la señal de 'STOP' (R-2) y la de 'Ceda el Paso' (R-1)?",
+    opts:["STOP obliga a detenerse completamente; Ceda el paso solo obliga si hay tráfico","Son equivalentes, ambas obligan a detenerse","STOP solo aplica en carreteras; Ceda el paso en ciudad"],
+    ans:0,
+    explain:"La diferencia clave: STOP (R-2) = detención obligatoria e imperativa siempre, aunque la vía esté libre. Ceda el paso (R-1) = ceder la preferencia pero sin detenerse obligatoriamente si la vía está libre. Ambas exigen ceder el paso al tráfico de la otra vía.",
+    refSvg: null, refText:null
+  },
+
+  // ── NORMAS DE CIRCULACIÓN ──────────────────────
+  {
+    id:16, cat:"Normas",
+    q: "¿A qué velocidad máxima puedes circular en una autopista con un turismo?",
+    opts:["100 km/h","110 km/h","120 km/h"],
+    ans:2,
+    explain:"La velocidad máxima genérica en autopista y autovía para turismos es 120 km/h. En vías convencionales con doble sentido es 90 km/h, y en vías urbanas 50 km/h (o la señalizada). Desde 2021 las zonas urbanas de plataforma única son 20 km/h.",
+    refSvg:null, refText:null
+  },
+  {
+    id:17, cat:"Normas",
+    q: "En una vía urbana sin señal de velocidad, ¿cuál es el límite genérico para un turismo?",
+    opts:["30 km/h en todas las vías","50 km/h","40 km/h"],
+    ans:1,
+    explain:"El límite genérico en vías urbanas es 50 km/h. Sin embargo, desde mayo 2021, en calles de un solo carril o de plataforma única el límite es 30 km/h. En calles de un carril por sentido también se aplican 30 km/h por defecto desde esa reforma.",
+    refSvg:null, refText:null
+  },
+  {
+    id:18, cat:"Normas",
+    q: "¿Cuál es el límite de velocidad genérico en carretera convencional (doble sentido, sin separación física) para un turismo?",
+    opts:["90 km/h","100 km/h","110 km/h"],
+    ans:0,
+    explain:"Desde el 14 de enero de 2021, el límite genérico en carreteras convencionales (de doble sentido sin mediana) bajó de 100 a 90 km/h para turismos. En carreteras de doble sentido con mediana o arcén pavimentado de 1,5m+ sigue siendo 100 km/h.",
+    refSvg:null, refText:null
+  },
+  {
+    id:19, cat:"Normas",
+    q: "¿Por qué carril debes circular normalmente en una autovía de tres carriles?",
+    opts:["Por el carril central","Por el carril derecho, dejando los otros para adelantar","Por el carril que prefieras si no hay tráfico"],
+    ans:1,
+    explain:"La norma general es circular por el carril derecho. Los carriles central e izquierdo se usan solo para adelantar. Permanecer en el carril central o izquierdo sin adelantar se considera infracción grave (adelantamiento indebido por la derecha).",
+    refSvg:null, refText:null
+  },
+  {
+    id:20, cat:"Normas",
+    q: "¿A qué distancia mínima de seguridad debes mantener con el vehículo de delante en autopista?",
+    opts:["La distancia recorrida en 2 segundos","50 metros fijos","La distancia recorrida en 1 segundo"],
+    ans:0,
+    explain:"La norma de los 2 segundos: debes mantener al menos la distancia que recorrerías en 2 segundos. A 120 km/h eso equivale aproximadamente a 67 metros. La DGT recomienda ampliar esta distancia con lluvia, niebla o cansancio.",
+    refSvg:null, refText:null
+  },
+  {
+    id:21, cat:"Normas",
+    q: "¿Cuándo está permitido usar el carril adicional de una vía convencional (carril de adelantamiento 2+1)?",
+    opts:["Siempre que quieras ir más rápido","Solo para adelantar, debiendo regresar al carril derecho tras finalizar","Para circular habitualmente si no hay tráfico"],
+    ans:1,
+    explain:"En las carreteras 2+1 (nueva señalización 2025), el carril adicional izquierdo es exclusivo para adelantar. Tras completar el adelantamiento, debes volver al carril derecho inmediatamente. No es un carril de circulación habitual.",
+    refSvg:null, refText:null
+  },
+  {
+    id:22, cat:"Normas",
+    q: "En un cruce sin señalizar entre dos vehículos, ¿quién tiene prioridad?",
+    opts:["El vehículo que llega por la izquierda","El vehículo que llega por la derecha","El vehículo que lleva más velocidad"],
+    ans:1,
+    explain:"Norma de prioridad a la derecha: en intersecciones sin señalizar, tienes que ceder el paso al vehículo que llega por tu derecha. Esta norma se aplica cuando no hay señales que indiquen otra prioridad.",
+    refSvg:null, refText:null
+  },
+  {
+    id:23, cat:"Normas",
+    q: "¿Cuándo se debe encender la luz de cruce (cortas) durante el día?",
+    opts:["Solo es obligatorio de noche","En tuneles, pasos inferiores, vías con mediana, lluvia intensa o niebla","Solo cuando hace niebla"],
+    ans:1,
+    explain:"Las luces de cruce son obligatorias: en túneles y pasos inferiores (siempre), en vías con separación física entre sentidos, con lluvia intensa, niebla, nieve o polvo. También en vías de dos carriles o más por sentido fuera de ciudad. Muchos conductores las usan siempre, lo que es correcto.",
+    refSvg:null, refText:null
+  },
+  {
+    id:24, cat:"Normas",
+    q: "¿Puedes girar a la izquierda donde hay una línea continua en el centro de la calzada?",
+    opts:["Sí, si el giro es muy breve","No, la línea continua no puede ser cruzada ni traspasada","Sí, si no hay tráfico en sentido contrario"],
+    ans:1,
+    explain:"La línea continua no puede ser cruzada, traspasada ni circulada sobre ella. Prohíbe cambiar de carril, girar a la izquierda, adelantar o invadir el sentido contrario. Cruzarla es una infracción muy grave con pérdida de 4 puntos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:25, cat:"Normas",
+    q: "¿En qué casos está permitido adelantar por la derecha?",
+    opts:["Cuando el vehículo de delante va a girar a la izquierda y hay espacio suficiente","Siempre que el carril derecho vaya más rápido","Nunca está permitido adelantar por la derecha"],
+    ans:0,
+    explain:"Adelantar por la derecha solo está permitido cuando el vehículo al que se adelanta va a girar a la izquierda o cuando se circula en vías con varios carriles en el mismo sentido con tráfico denso (retención). En casos normales, el adelantamiento es siempre por la izquierda.",
+    refSvg:null, refText:null
+  },
+  {
+    id:26, cat:"Normas",
+    q: "Cuando te incorporas a una autopista por el carril de aceleración, ¿quién tiene prioridad?",
+    opts:["Tú, porque eres el que se está incorporando","Los vehículos que ya circulan por el carril derecho de la autopista","Ninguno: es una situación de prioridad compartida"],
+    ans:1,
+    explain:"Los vehículos que ya circulan en la autopista tienen prioridad absoluta. El carril de aceleración sirve para igualar la velocidad con el tráfico de la autopista antes de incorporarse. Debes esperar un hueco adecuado sin obligar a los demás a frenar.",
+    refSvg:null, refText:null
+  },
+  {
+    id:27, cat:"Normas",
+    q: "¿Dónde está prohibido hacer un cambio de sentido (media vuelta)?",
+    opts:["En autopistas y autovías, túneles, puentes, curvas y tramos con escasa visibilidad","Solo en autopistas","Solo en curvas sin visibilidad"],
+    ans:0,
+    explain:"El cambio de sentido está prohibido en autopistas y autovías, túneles, tramos de visibilidad reducida (curvas, cimas de cuesta), intersecciones reguladas por semáforo, y cuando exista señal prohibitoria. En ciudad también hay restricciones.",
+    refSvg:null, refText:null
+  },
+  {
+    id:28, cat:"Normas",
+    q: "¿Cuál es la actitud correcta ante un vehículo de emergencia (ambulancia, bomberos, policía) con señales acústicas y luminosas?",
+    opts:["Detenerse inmediatamente en el carril en que circulas","Facilitar el paso pegándote a la derecha o deteniéndote, formando pasillo de emergencia en autopista","Acelerar para no entorpecer al vehículo de emergencia"],
+    ans:1,
+    explain:"Debes facilitar el paso de los vehículos de emergencia. En autopistas y autovías con retención, los vehículos de carril izquierdo se pegan a la izquierda y los del derecho a la derecha, creando un pasillo central. Entorpecer a vehículos de emergencia es infracción grave.",
+    refSvg:null, refText:null
+  },
+  {
+    id:29, cat:"Normas",
+    q: "¿A qué distancia mínima de un paso de cebra está prohibido aparcar?",
+    opts:["3 metros","5 metros","10 metros"],
+    ans:1,
+    explain:"Está prohibido aparcar a menos de 5 metros de un paso de peatones. También está prohibido aparcar en intersecciones, a menos de 3 metros de carriles bici, en arcenes, y en paradas de transporte público.",
+    refSvg:null, refText:null
+  },
+  {
+    id:30, cat:"Normas",
+    q: "¿Qué debes hacer cuando te encuentras con el semáforo en ámbar al acercarte a una intersección?",
+    opts:["Acelerar para pasar antes de que se ponga en rojo","Detenerte si puedes hacerlo sin peligro; si no puedes, continuar con precaución","Continuar siempre porque el ámbar no es obligatorio detenerse"],
+    ans:1,
+    explain:"El ámbar significa 'detente si puedes'. Si ya estás tan cerca que frenar sería peligroso (frenazo brusco), puedes continuar con precaución. Pero si puedes parar con seguridad, debes hacerlo. Pasar el ámbar intencionalmente cuando se puede parar es infracción.",
+    refSvg:null, refText:null
+  },
+  {
+    id:31, cat:"Normas",
+    q: "¿Cuántos puntos tiene el carnet de conducir al obtenerlo por primera vez?",
+    opts:["8 puntos","12 puntos","6 puntos"],
+    ans:0,
+    explain:"El permiso de conducir se obtiene inicialmente con 8 puntos (período de prueba de 2 años). Si no se cometen infracciones, a los 2 años sube a 12 puntos. El máximo recuperable es 15 puntos si se realizan cursos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:32, cat:"Normas",
+    q: "¿Qué número de puntos se pierde por usar el móvil al volante?",
+    opts:["3 puntos","6 puntos","4 puntos"],
+    ans:1,
+    explain:"Usar el teléfono móvil sujetado con la mano mientras se conduce conlleva la pérdida de 6 puntos y una multa de 200 euros. Es una de las sanciones más severas del carnet por puntos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:33, cat:"Normas",
+    q: "¿Es obligatorio el uso del cinturón de seguridad en vías urbanas?",
+    opts:["No, en ciudad el cinturón es opcional","Sí, es obligatorio en todas las vías para todos los ocupantes del vehículo","Solo para el conductor y el pasajero delantero"],
+    ans:1,
+    explain:"El cinturón de seguridad es obligatorio para TODOS los ocupantes del vehículo en TODAS las vías (ciudad, carretera, autopista), tanto en asientos delanteros como traseros. No llevarlo es una infracción grave con pérdida de 3 puntos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:34, cat:"Normas",
+    q: "¿Cuándo está permitido no usar el cinturón de seguridad?",
+    opts:["Nunca: siempre es obligatorio salvo excepciones médicas documentadas y maniobras de aparcamiento en marchas lentas","Solo cuando se circula a menos de 20 km/h","Cuando el vehículo tiene airbag frontal"],
+    ans:0,
+    explain:"Solo están exentos: conductores que realicen maniobras de marcha atrás, policías/personal de emergencias en servicio, y personas con certificado médico que acredite que no pueden usarlo. El airbag no exime del cinturón; de hecho, son complementarios.",
+    refSvg:null, refText:null
+  },
+
+  // ── ALCOHOL, DROGAS Y DISTRACCIONES ────────────
+  {
+    id:35, cat:"Alcohol/Drogas",
+    q: "¿Cuál es la tasa de alcoholemia máxima permitida para conductores en período de prueba (menos de 2 años de carnet)?",
+    opts:["0,25 mg/l en aire espirado","0,15 mg/l en aire espirado","0,50 mg/l en aire espirado"],
+    ans:1,
+    explain:"Para conductores en período de prueba (primeros 2 años) y conductores profesionales (transporte de viajeros, mercancías peligrosas), la tasa es 0,15 mg/l en aire (0,3 g/l en sangre). Para conductores habituales es 0,25 mg/l en aire (0,5 g/l en sangre).",
+    refSvg:null, refText:null
+  },
+  {
+    id:36, cat:"Alcohol/Drogas",
+    q: "¿Cuál es la tasa de alcoholemia general para conductores experimentados (más de 2 años de permiso)?",
+    opts:["0,5 g/l en sangre (0,25 mg/l en aire)","0,8 g/l en sangre","1,0 g/l en sangre"],
+    ans:0,
+    explain:"La tasa general es 0,5 g/l en sangre o 0,25 mg/l en aire espirado. Superar estas cifras con el primer control es infracción muy grave. A partir de 1,2 g/l en sangre o 0,6 mg/l en aire, es delito penal.",
+    refSvg:null, refText:null
+  },
+  {
+    id:37, cat:"Alcohol/Drogas",
+    q: "¿Puede afectar al manejo ciertos medicamentos sin receta que se venden en farmacia?",
+    opts:["No, si son medicamentos legales no afectan a la conducción","Sí, algunos antihistamínicos, ansiolíticos y analgésicos pueden afectar la capacidad de conducción","Solo los medicamentos con receta pueden afectar la conducción"],
+    ans:1,
+    explain:"Muchos medicamentos de libre dispensación (antihistamínicos, jarabes para la tos, relajantes musculares, algunos antidepresivos) pueden producir somnolencia, ralentizar los reflejos o alterar la concentración. Si el prospecto indica 'no conduzca', debes respetarlo.",
+    refSvg:null, refText:null
+  },
+  {
+    id:38, cat:"Alcohol/Drogas",
+    q: "¿Cuánto tiempo puede seguir detectándose cannabis en un análisis de saliva para el control de drogas en carretera?",
+    opts:["Solo 1 hora después del consumo","Puede detectarse hasta varias horas o días después del consumo","Solo si se consume justo antes de conducir"],
+    ans:1,
+    explain:"El cannabis (THC) puede detectarse en saliva hasta 12-24 horas después del consumo (a veces más en consumidores habituales). Conducir con cualquier sustancia psicoactiva en el organismo es infracción muy grave, independientemente del nivel de deterioro.",
+    refSvg:null, refText:null
+  },
+  {
+    id:39, cat:"Alcohol/Drogas",
+    q: "Si el alcoholímetro da positivo en el control preventivo, ¿qué derecho tienes?",
+    opts:["Ninguno, el resultado del primer test es definitivo","Derecho a repetir la prueba en otro etilómetro oficial o solicitar análisis de sangre como contraprueba","Puedes negarte a soplar sin consecuencias"],
+    ans:1,
+    explain:"Tienes derecho a una segunda prueba con un etilómetro diferente, y si el resultado es positivo o hay diferencia entre ambas mediciones, puedes solicitar análisis de sangre como contraprueba. Negarse a realizar la prueba de alcoholemia es delito (no solo infracción).",
+    refSvg:null, refText:null
+  },
+  {
+    id:40, cat:"Alcohol/Drogas",
+    q: "¿Cuántos puntos se pierden por conducir con una tasa de alcohol superior a la permitida?",
+    opts:["3 puntos","6 puntos","4 puntos"],
+    ans:1,
+    explain:"Conducir superando la tasa de alcohol permitida supone la pérdida de 6 puntos del carnet y una multa de 500 euros (o más si supera 0,5 mg/l en aire, donde la multa puede llegar a 1.000€ y supone pérdida de 6 puntos también).",
+    refSvg:null, refText:null
+  },
+
+  // ── MECÁNICA Y SEGURIDAD ──────────────────────
+  {
+    id:41, cat:"Mecánica",
+    q: "¿Cuándo se enciende el testigo rojo de batería en el cuadro de mandos?",
+    opts:["Cuando la batería necesita recargarse con un cargador externo","Cuando el alternador no está cargando la batería mientras el motor está en marcha","Cuando la batería está completamente descargada y el motor no arranca"],
+    ans:1,
+    explain:"El testigo de batería (icono de pila) indica que el alternador no está cargando correctamente la batería con el motor en marcha. Puede indicar una correa del alternador rota, el propio alternador averiado o un problema eléctrico. Si se enciende en marcha, debes parar en lugar seguro.",
+    refSvg:null, refText:null
+  },
+  {
+    id:42, cat:"Mecánica",
+    q: "¿Qué indica el testigo naranja/rojo de temperatura del motor (termómetro con olas)?",
+    opts:["El motor está a temperatura óptima de funcionamiento","El motor está sobrecalentado: debes parar inmediatamente","El líquido refrigerante está por debajo del mínimo"],
+    ans:1,
+    explain:"Si el testigo de temperatura del motor se enciende en rojo, el motor está sobrecalentado. Debes parar inmediatamente en lugar seguro, apagar el motor y esperar a que se enfríe. Nunca abras el tapón del radiador en caliente (puede salir vapor a presión). Llamar a asistencia en carretera.",
+    refSvg:null, refText:null
+  },
+  {
+    id:43, cat:"Mecánica",
+    q: "¿Qué acción realizas con el pedal del embrague en un vehículo manual?",
+    opts:["Desacoplas el motor de la caja de cambios para cambiar de marcha o arrancar","Reduces la velocidad del vehículo","Controlas la velocidad de ralentí del motor"],
+    ans:0,
+    explain:"El embrague desconecta mecánicamente el motor de la caja de cambios. Permite cambiar marchas sin dañar los engranajes y arrancar o detenerse sin apagar el motor. Mantener el embrague pisado en pendiente (cabalgar) desgasta el disco de embrague.",
+    refSvg:null, refText:null
+  },
+  {
+    id:44, cat:"Mecánica",
+    q: "¿Con qué frecuencia aproximada se recomienda revisar la presión de los neumáticos?",
+    opts:["Solo cuando se noten visiblemente desinflados","Al menos una vez al mes y siempre antes de viajes largos","Solo en la ITV"],
+    ans:1,
+    explain:"Se recomienda revisar la presión mensualmente y siempre antes de viajes largos. Un neumático desinflado aumenta el consumo, reduce el agarre, aumenta la distancia de frenado y el riesgo de reventón. La presión debe revisarse con el neumático frío.",
+    refSvg:null, refText:null
+  },
+  {
+    id:45, cat:"Mecánica",
+    q: "¿Cuándo debes encender las luces de emergencia (intermitentes simultáneos)?",
+    opts:["Cuando buscas aparcamiento en doble fila brevemente","Cuando tu vehículo supone un peligro o es obligado a circular muy lento (avería, accidente, retención brusca)","Solo cuando tienes una avería total del vehículo"],
+    ans:1,
+    explain:"Las luces de emergencia se usan cuando el vehículo supone un peligro o cuando debes parar de forma inesperada: avería, accidente, circulación muy lenta por retención brusca, o remolque. Usarlas para aparcar en doble fila es incorrecto y no exime de la multa.",
+    refSvg:null, refText:null
+  },
+  {
+    id:46, cat:"Mecánica",
+    q: "¿Qué ocurre si la profundidad del dibujo de los neumáticos baja de 1,6 mm?",
+    opts:["El vehículo pasa la ITV con advertencia pero puede circular","Los neumáticos son deficientes: están fuera de norma y debes cambiarlos","Solo es obligatorio cambiarlos en invierno"],
+    ans:1,
+    explain:"La profundidad mínima legal del dibujo del neumático es 1,6 mm. Por debajo de esa cifra el neumático no evacúa bien el agua (riesgo de aquaplaning), tiene menor agarre y es ilegal. La ITV lo detecta y puede suponer una calificación desfavorable.",
+    refSvg:null, refText:null
+  },
+  {
+    id:47, cat:"Mecánica",
+    q: "¿Qué es el ABS (Anti-lock Braking System)?",
+    opts:["Un sistema que evita que se bloqueen las ruedas al frenar bruscamente, manteniendo la dirección","Un sistema que frena automáticamente el vehículo al detectar obstáculos","Un sistema de frenado que multiplica la fuerza del pedal de freno"],
+    ans:0,
+    explain:"El ABS impide que las ruedas se bloqueen durante un frenado de emergencia, lo que permite mantener el control de dirección del vehículo mientras frenas. Con ABS debes pisar el freno con fuerza y mantenerlo: no bombees el freno (como se hacía sin ABS).",
+    refSvg:null, refText:null
+  },
+  {
+    id:48, cat:"Mecánica",
+    q: "¿Para qué sirven los triángulos de pre-señalización de peligro?",
+    opts:["Para señalizar el trayecto a la gasolinera más cercana","Para advertir a otros conductores de la presencia de un vehículo averiado o accidentado","Son decorativos y no tienen función vial obligatoria"],
+    ans:1,
+    explain:"Los triángulos de emergencia deben colocarse antes y después del vehículo averiado o accidentado (30-50 m de distancia) para avisar al resto del tráfico. Desde 2021, en autovías y autopistas NO se deben colocar: debes ponerte el chaleco y permanecer en el arcén o zona de seguridad.",
+    refSvg:null, refText:null
+  },
+  {
+    id:49, cat:"Mecánica",
+    q: "¿Qué es el 'efecto aquaplaning' y cómo lo prevenimos?",
+    opts:["Pérdida de adherencia en curva; se previene no acelerando en curvas","Pérdida de contacto de los neumáticos con el asfalto por una capa de agua; se previene reduciendo velocidad con lluvia y manteniendo los neumáticos en buen estado","Sobrecalentamiento de los frenos por lluvia; se previene frenando suavemente"],
+    ans:1,
+    explain:"El aquaplaning ocurre cuando el neumático no puede evacuar el agua suficientemente rápido y el coche 'planea' sobre una película de agua, perdiendo toda tracción y dirección. Se previene: velocidad reducida con lluvia, neumáticos con buen dibujo y presión correcta, evitar charcos bruscos.",
+    refSvg:null, refText:null
+  },
+
+  // ── PRIMEROS AUXILIOS ────────────────────────
+  {
+    id:50, cat:"Primeros Auxilios",
+    q: "Llegas a un accidente. ¿Cuál es el orden correcto de actuación (PAS)?",
+    opts:["Primero atender a los heridos, luego llamar y señalizar","Proteger, Avisar, Socorrer (PAS): señalizar primero, llamar al 112, luego atender heridos","Llamar al 112, esperar, no tocar nada"],
+    ans:1,
+    explain:"El protocolo PAS: 1) PROTEGER: señalizar la zona para evitar nuevos accidentes. 2) AVISAR: llamar al 112 con información precisa (lugar, heridos, tipo de accidente). 3) SOCORRER: atender a los heridos según capacidad, sin moverlos salvo riesgo de incendio.",
+    refSvg:null, refText:null
+  },
+  {
+    id:51, cat:"Primeros Auxilios",
+    q: "¿Cuándo está justificado mover a un accidentado del vehículo?",
+    opts:["Siempre, para colocarlo en posición más cómoda","Solo si existe riesgo inminente de incendio, explosión u otro peligro grave","Si el accidentado lo pide"],
+    ans:1,
+    explain:"Un accidentado NO debe moverse si existe riesgo de lesión medular. Solo se justifica moverlo si hay peligro inminente (incendio, riesgo de explosión, ahogamiento). Si hay que moverlo, se hace alineando cabeza, cuello y columna (como una unidad) para minimizar daños.",
+    refSvg:null, refText:null
+  },
+  {
+    id:52, cat:"Primeros Auxilios",
+    q: "¿Qué es la posición lateral de seguridad (PLS) y cuándo se usa?",
+    opts:["Posición boca arriba con piernas elevadas; para heridos con fracturas","Posición de costado para mantener la vía aérea abierta; se usa en inconscientes que respiran","Posición sentada para heridos con dolor torácico"],
+    ans:1,
+    explain:"La PLS (tumbado de lado) se usa en personas inconscientes que respiran. Mantiene la vía aérea libre (evita que la lengua tape la garganta o que el vómito cause asfixia). No se usa en sospecha de lesión medular salvo que el inconsciente no respire correctamente.",
+    refSvg:null, refText:null
+  },
+  {
+    id:53, cat:"Primeros Auxilios",
+    q: "¿Qué debes hacer si una persona inconsciente no respira (o respira anormalmente)?",
+    opts:["Colocarla en PLS y esperar al 112","Iniciar maniobras de RCP: 30 compresiones torácicas seguidas de 2 ventilaciones, mientras alguien llama al 112","Solo llamar al 112 y no tocar a la víctima"],
+    ans:1,
+    explain:"Si la víctima está inconsciente y no respira (o con respiración agónica), debes iniciar la RCP básica: 30 compresiones en el centro del pecho (100-120/min, 5-6 cm profundidad) + 2 ventilaciones de rescate. Continuar hasta que llegue la ambulancia o la víctima se recupere.",
+    refSvg:null, refText:null
+  },
+
+  // ── CONDUCCIÓN SEGURA / FATIGA ───────────────
+  {
+    id:54, cat:"Conducción Segura",
+    q: "¿Cuánto tiempo máximo se recomienda conducir sin hacer una pausa en carretera?",
+    opts:["3 horas","2 horas como máximo (pausa de 15-20 min)","4 horas si te sientes bien"],
+    ans:1,
+    explain:"La DGT recomienda no superar 2 horas de conducción continua sin una pausa de al menos 15-20 minutos. La fatiga empieza a manifestarse antes de que el conductor la note conscientemente, reduciendo los reflejos y la atención.",
+    refSvg:null, refText:null
+  },
+  {
+    id:55, cat:"Conducción Segura",
+    q: "¿Qué efecto tiene la fatiga sobre los reflejos?",
+    opts:["Los mejora ligeramente porque el conductor se concentra más","Los deteriora: aumenta el tiempo de reacción, reduce la atención y puede causar microsueños","Solo afecta en largas distancias superiores a 500 km"],
+    ans:1,
+    explain:"La fatiga aumenta el tiempo de reacción, reduce la capacidad de tomar decisiones, provoca microsueños (duración de 3-4 segundos, durante los que el coche puede recorrer decenas de metros) y disminuye el campo visual. Es causa de muchos accidentes mortales en carretera.",
+    refSvg:null, refText:null
+  },
+  {
+    id:56, cat:"Conducción Segura",
+    q: "¿Qué es la distancia de seguridad lateral al adelantar a un ciclista fuera de ciudad?",
+    opts:["50 cm de separación","1,5 metros como mínimo","No hay distancia mínima regulada"],
+    ans:1,
+    explain:"La ley exige al menos 1,5 metros de separación lateral al adelantar a un ciclista en vía convencional. Para garantizarlo puede ser necesario invadir el carril contrario si hay visibilidad suficiente. No respetar esta distancia es una infracción grave.",
+    refSvg:null, refText:null
+  },
+  {
+    id:57, cat:"Conducción Segura",
+    q: "¿Cuál es el efecto del 'deslumbramiento' de otros vehículos y cómo debes reaccionar?",
+    opts:["Girar la mirada hacia la derecha de la calzada y reducir velocidad","Encender las luces largas para contrarrestar el deslumbramiento","Frenar bruscamente y detenerse en el carril"],
+    ans:0,
+    explain:"Ante el deslumbramiento de vehículos en sentido contrario, debes: dirigir la mirada hacia el borde derecho de la calzada (línea blanca de la derecha como referencia), reducir velocidad y no encender las largas (deslumbrarías más al otro conductor).",
+    refSvg:null, refText:null
+  },
+  {
+    id:58, cat:"Conducción Segura",
+    q: "¿Cuál es la distancia de frenado aproximada a 120 km/h con condiciones normales?",
+    opts:["Unos 30 metros","Unos 75-80 metros (solo frenada) más distancia de reacción","Unos 50 metros"],
+    ans:1,
+    explain:"A 120 km/h, la distancia de reacción (1 segundo) es unos 33 metros. La distancia de frenada pura es unos 75-80 metros. Total: más de 100 metros hasta parar. Con lluvia, neumáticos desgastados o cansancio, esta distancia aumenta considerablemente.",
+    refSvg:null, refText:null
+  },
+
+  // ── PERCEPCIÓN DEL RIESGO (NUEVAS 2026) ─────
+  {
+    id:59, cat:"Percepción del Riesgo",
+    q: "Circulando por autopista con lluvia intensa, el vehículo de delante frena de repente. ¿Qué debes hacer?",
+    opts:["Frenar y girar al carril izquierdo bruscamente","Frenar firmemente sin soltar el pedal (ABS activo) manteniendo la trayectoria","Tocar el claxon y acelerar para cambiar de carril"],
+    ans:1,
+    explain:"Con ABS, debes frenar con fuerza y mantener el pedal apretado: el sistema evitará el bloqueo de ruedas y podrás mantener la dirección. No sueltes el freno. Con lluvia, la distancia de frenado aumenta un 30-50%, por eso mantener la distancia de seguridad es crítico.",
+    refSvg:null, refText:null
+  },
+  {
+    id:60, cat:"Percepción del Riesgo",
+    q: "Circulando de noche, ves a lo lejos un peatón vestido de oscuro al borde de la carretera. ¿Cuál es la actitud correcta?",
+    opts:["Mantener velocidad: el peatón debe alejarse de la calzada","Reducir velocidad, poner luces de cruce si no las tienes, y estar preparado para frenar","Tocar el claxon para avisarle y continuar a la misma velocidad"],
+    ans:1,
+    explain:"Peatón de noche + ropa oscura = altísimo riesgo. Debes reducir velocidad significativamente, asegurarte de tener luces de cruce encendidas, prepararte para frenar y pasar lo más alejado posible. La DGT estima que más del 40% de los atropellos mortales ocurren de noche.",
+    refSvg:null, refText:null
+  },
+  {
+    id:61, cat:"Percepción del Riesgo",
+    q: "En un cruce con semáforo en verde para ti, ¿debes comprobar si otros vehículos respetan su semáforo en rojo?",
+    opts:["No, el verde te da prioridad absoluta y puedes entrar sin mirar","Sí, siempre debes asegurarte de que la intersección está despejada antes de entrar","Solo debes mirarlo si es un cruce grande"],
+    ans:1,
+    explain:"El verde te da prioridad legal, pero no te protege físicamente de un vehículo que se salte el rojo. La conducción defensiva exige comprobar visualmente que la intersección está libre antes de entrar. Muchos accidentes graves ocurren en semáforos por esta razón.",
+    refSvg:null, refText:null
+  },
+  {
+    id:62, cat:"Percepción del Riesgo",
+    q: "Un camión grande reduce velocidad delante de ti en carretera convencional. ¿Qué riesgo debes anticipar?",
+    opts:["Solo que el camión va a parar: puedes adelantar cuando quieras","Puede estar frenando por algo que tú no ves (peatón, cruce, animal, obstáculo): reduce velocidad y espera visibilidad","El camión probablemente tiene problemas mecánicos: adelántalo cuanto antes"],
+    ans:1,
+    explain:"Los vehículos grandes restringen enormemente la visibilidad. Si un camión frena inesperadamente, puede ser por algo que tú no puedes ver. Reducir velocidad y no adelantar hasta tener visibilidad completa es conducción defensiva correcta. Los accidentes mortales por alcance son muy frecuentes en este escenario.",
+    refSvg:null, refText:null
+  },
+  {
+    id:63, cat:"Percepción del Riesgo",
+    q: "Conduces por una calle con coches aparcados a ambos lados. Un balón rueda hacia la calzada. ¿Qué haces?",
+    opts:["Tocar el claxon y continuar a la misma velocidad","Frenar inmediatamente: donde hay un balón, muy probablemente hay un niño detrás","Solo frenar si ves directamente al niño"],
+    ans:1,
+    explain:"El balón es una señal de peligro inequívoca de presencia infantil. Debes frenar ANTES de ver al niño, porque cuando lo veas puede ser demasiado tarde. Esta situación aparece frecuentemente en preguntas de percepción del riesgo DGT 2026.",
+    refSvg:null, refText:null
+  },
+
+  // ── NORMAS AVANZADAS ─────────────────────────
+  {
+    id:64, cat:"Normas",
+    q: "¿Qué es el 'pasillo de emergencia' y cuándo debes formarlo?",
+    opts:["Un carril especial señalizado en autopistas nuevas","El espacio libre creado por los vehículos hacia los lados del carril central para que pasen los servicios de emergencia en caso de retención grave","Una zona de detención de emergencia en el arcén"],
+    ans:1,
+    explain:"Desde enero 2019 es obligatorio crear pasillo de emergencia al producirse una retención en autopistas y autovías. Vehículos del carril izquierdo → se pegan a la izquierda. Vehículos del carril derecho y central → se pegan a la derecha. El centro queda libre para ambulancias y bomberos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:65, cat:"Normas",
+    q: "¿Cuándo es obligatorio usar cadenas o neumáticos de invierno?",
+    opts:["Solo en puertos de montaña señalizados con la señal de cadenas obligatorias","Cuando la vía está nevada o con hielo y así lo indiquen las señales o las autoridades","Siempre que la temperatura sea inferior a 0°C"],
+    ans:1,
+    explain:"Las cadenas son obligatorias cuando exista nieve, hielo o barro en la calzada y así lo señalicen las señales correspondientes. Los neumáticos de invierno (M+S o de montaña) son una alternativa aceptada a las cadenas en muchas vías.",
+    refSvg:null, refText:null
+  },
+  {
+    id:66, cat:"Normas",
+    q: "¿Cuál es la norma sobre el uso del móvil con manos libres al volante?",
+    opts:["Está totalmente prohibido usar el móvil al volante, incluso con manos libres, auricular o altavoz","Está permitido con auricular o manos libres integrado, pero sigue siendo sancionable usar el auricular manual","Está permitido si solo usas el altavoz sin tocar el teléfono"],
+    ans:0,
+    explain:"Desde 2021, la normativa española prohíbe el uso del móvil al volante de cualquier forma que implique sostenerlo o manipularlo. El uso de manos libres integrado en el vehículo o auricular bluetooth CONECTADO al dispositivo continúa siendo legal, pero la normativa hace difusa la frontera. La DGT aplica tolerancia cero a cualquier uso manual.",
+    refSvg:null, refText:null
+  },
+  {
+    id:67, cat:"Normas",
+    q: "¿Cuál es la velocidad máxima cuando se remolca un vehículo con barra o cable?",
+    opts:["60 km/h en todos los casos","En autopista 80 km/h; en carretera 70 km/h; en ciudad 40 km/h","30 km/h en cualquier tipo de vía"],
+    ans:1,
+    explain:"Al remolcar con barra o cable existen límites específicos: autopista/autovía 80 km/h, carretera convencional 70 km/h (no 90 km/h), y ciudad 40 km/h. Además, la longitud máxima del cable es 5 metros y debe ser visible. El vehículo remolcado necesita conductor con permiso.",
+    refSvg:null, refText:null
+  },
+  {
+    id:68, cat:"Normas",
+    q: "¿Qué debes hacer al acercarte a un paso a nivel sin barreras?",
+    opts:["Acelerar para cruzar rápidamente","Reducir velocidad, mirar a ambos lados, asegurarte de que no viene ningún tren, y cruzar solo cuando sea seguro","Detenerte siempre aunque no venga ningún tren"],
+    ans:1,
+    explain:"En paso a nivel sin barreras debes: reducir velocidad, encender luces de cruce, mirar a ambos lados, escuchar (bajar ventanilla si es necesario), y cruzar con velocidad constante y mínima solo cuando estés seguro de que no viene ningún tren. Una vez iniciado el cruce, no pares.",
+    refSvg:null, refText:null
+  },
+  {
+    id:69, cat:"Normas",
+    q: "¿Qué prioridad tiene el vehículo que ya está en una rotonda respecto al que entra?",
+    opts:["El que entra tiene prioridad al incorporarse","El que ya circula dentro de la rotonda tiene prioridad sobre el que entra","Depende de la dirección de los vehículos"],
+    ans:1,
+    explain:"Los vehículos que ya están circulando dentro de la glorieta tienen prioridad sobre los que pretenden entrar. Los que entran deben ceder el paso. Esta norma aplica salvo que haya señales específicas que indiquen otra cosa (raro pero posible).",
+    refSvg:null, refText:null
+  },
+  {
+    id:70, cat:"Normas",
+    q: "¿Qué señal luminosa de emergencia debe tener obligatoriamente todo vehículo a motor?",
+    opts:["Solo el triángulo de emergencia","Chaleco reflectante de alta visibilidad y dos triángulos de pre-señalización","Chaleco + triángulos + extintor"],
+    ans:1,
+    explain:"Es obligatorio llevar: 1 chaleco reflectante (de alta visibilidad, categoría EN-ISO 20471) y 2 triángulos de pre-señalización. Aunque desde 2021 en autopista no se colocan triángulos (se queda en zona segura), siguen siendo obligatorios en el vehículo. El extintor no es obligatorio en turismo.",
+    refSvg:null, refText:null
+  },
+
+  // ── MÁS SEÑALES ─────────────────────────────
+  {
+    id:71, cat:"Señales", img: SVG.curve('right'),
+    q: "Esta señal triangular con curva indica:",
+    opts:["Curva peligrosa: debes reducir velocidad antes de entrar en la curva","Curva suave: puedes mantener la velocidad","Fin de zona de curvas"],
+    ans:0,
+    explain:"La señal triangular P-13a/P-13b (curva peligrosa) advierte de una curva próxima con radio reducido. Debes adaptar tu velocidad ANTES de entrar en la curva, no durante. Entrar en curva frenando es peligroso (puede provocar derrape).",
+    refSvg: SVG.curve('right'), refText:"<strong>P-13 Curva peligrosa:</strong> Triángulo rojo con curva. Reduce velocidad ANTES de la curva. Recuerda: frena en recta, acelera suavemente a la salida de la curva."
+  },
+  {
+    id:72, cat:"Señales",
+    q: "Una señal cuadrada azul con letra 'H' blanca indica:",
+    opts:["Hospital próximo: circula con silencio","Punto de recarga de hidrógeno","Heliport próximo"],
+    ans:0,
+    explain:"La señal cuadrada azul con H blanca indica la proximidad de un hospital. En su entorno está prohibido el uso de señales acústicas (excepto emergencia) y debes circular con especial precaución y silencio.",
+    refSvg:null, refText:null
+  },
+  {
+    id:73, cat:"Señales",
+    q: "¿Qué diferencia hay entre la señal de prohibición 'R-100 (prohibido el paso)' y la 'R-101 (dirección prohibida)'?",
+    opts:["Son exactamente iguales","R-100 prohíbe el paso a todos los vehículos; R-101 prohíbe solo ese sentido de circulación (calle de sentido contrario para ti)","R-100 es para peatones y R-101 para vehículos"],
+    ans:1,
+    explain:"R-100 (círculo rojo con franja roja horizontal): prohibido el paso a todo vehículo en ambos sentidos. R-101 (círculo rojo con franja blanca horizontal): prohíbe ese sentido de circulación para ti, pero la vía puede ser de sentido único en dirección contraria. Son señales similares visualmente pero con significado diferente.",
+    refSvg:null, refText:null
+  },
+  {
+    id:74, cat:"Normas",
+    q: "¿Cuál es la velocidad máxima en vías de 30 km/h según la reforma urbana de 2021?",
+    opts:["Solo en calles con señal específica de 30 km/h","En calles de un único carril por sentido (sin señal contraria), el límite genérico es 30 km/h","Solo en zonas escolares señalizadas"],
+    ans:1,
+    explain:"Desde mayo 2021: vías urbanas de un carril por sentido = límite genérico 30 km/h. Vías urbanas de dos o más carriles = 50 km/h. Calles de plataforma única (peatones y vehículos comparten espacio) = 20 km/h. Estas cifras son los límites genéricos sin señal.",
+    refSvg:null, refText:null
+  },
+  {
+    id:75, cat:"Mecánica",
+    q: "¿Qué indica el testigo de EPC (Control Electrónico de la Dirección Asistida) o el icono del volante con signo de exclamación?",
+    opts:["Que el volante está bloqueado por seguridad","Un fallo en el sistema de dirección asistida eléctrica: el volante puede ponerse más duro","Que debes ajustar la posición del volante"],
+    ans:1,
+    explain:"El testigo EPC (o icono de volante con '!') indica un problema en la dirección asistida eléctrica. El volante puede volverse más difícil de girar, especialmente a bajas velocidades. Debes llevar el vehículo al taller. No es una emergencia inmediata pero afecta a la maniobrabilidad.",
+    refSvg:null, refText:null
+  },
+  {
+    id:76, cat:"Alcohol/Drogas",
+    q: "¿Puede el café o las bebidas energéticas eliminar los efectos del alcohol?",
+    opts:["Sí, la cafeína contrarresta el efecto sedante del alcohol","No, solo el tiempo elimina el alcohol del organismo; el café puede hacerte sentir más despierto pero no reduce la tasa de alcoholemia","Solo funcionan si se toman justo antes de conducir"],
+    ans:1,
+    explain:"El único método que elimina el alcohol del organismo es el tiempo. El hígado metaboliza aproximadamente 0,1-0,15 g/l por hora. El café, el agua, el ejercicio o el vómito NO reducen la tasa de alcoholemia; a lo sumo hacen que te sientas más despierto sin reducir el deterioro real.",
+    refSvg:null, refText:null
+  },
+  {
+    id:77, cat:"Conducción Segura",
+    q: "¿Qué debes hacer si te quedas dormido al volante de forma repentina (microsueño)?",
+    opts:["Bajar la ventanilla y poner la radio a alto volumen para aguantar","Parar en el primer lugar seguro (área de servicio, arcén), salir del coche y descansar aunque sea 20 minutos","Acelerar para llegar antes a tu destino"],
+    ans:1,
+    explain:"Los microsueños son el signo más claro de que debes parar YA. No hay medida de emergencia que sustituya al descanso real. Parar 20 minutos puede salvarte la vida. Si no hay área de servicio, el arcén es mejor opción que continuar con sueño.",
+    refSvg:null, refText:null
+  },
+  {
+    id:78, cat:"Normas",
+    q: "¿Es obligatorio llevar las luces encendidas en el interior de un túnel aunque sea de día y esté bien iluminado?",
+    opts:["No, si el túnel está suficientemente iluminado no es necesario","Sí, es obligatorio encender las luces de cruce al entrar en cualquier túnel","Solo en túneles mayores de 500 metros"],
+    ans:1,
+    explain:"Al entrar en cualquier túnel, sea cual sea su longitud o iluminación, es obligatorio encender las luces de cruce (cortas). Esto aumenta tu visibilidad para otros conductores y se considera norma de seguridad imperativa.",
+    refSvg:null, refText:null
+  },
+  {
+    id:79, cat:"Normas",
+    q: "¿Cuáles son los límites de velocidad para un conductor novel (menos de 2 años de permiso) en autopista?",
+    opts:["120 km/h igual que el resto de conductores","100 km/h en autopista y autovía","110 km/h en autopista"],
+    ans:1,
+    explain:"Los conductores en período de prueba (primeros 2 años de permiso B) tienen un límite máximo de 100 km/h en autopista y autovía (frente a los 120 km/h generales). En carretera convencional su límite también es menor: 80 km/h.",
+    refSvg:null, refText:null
+  },
+  {
+    id:80, cat:"Normas",
+    q: "¿Qué es la tasa de alcoholemia 'delictiva' (pasa a ser delito penal, no solo infracción administrativa)?",
+    opts:["0,5 mg/l en aire o 1,0 g/l en sangre","0,6 mg/l en aire o 1,2 g/l en sangre","0,8 mg/l en aire o 1,6 g/l en sangre"],
+    ans:1,
+    explain:"A partir de 0,6 mg/l en aire espirado o 1,2 g/l en sangre, conducir bajo los efectos del alcohol pasa de infracción administrativa a delito penal (artículo 379 del Código Penal), con penas de hasta 6 meses de prisión o multa, y privación del permiso.",
+    refSvg:null, refText:null
+  },
+  {
+    id:81, cat:"Señales",
+    q: "¿Qué obligación impone una señal circular azul con una 'P' blanca?",
+    opts:["Prohibido aparcar","Aparcamiento obligatorio","Aparcamiento permitido o zona de aparcamiento"],
+    ans:2,
+    explain:"La señal circular azul con 'P' blanca (S-17 o similar) indica zona de aparcamiento permitido o regulado. Las señales de obligación son círculos azules con fondo azul. El aparcamiento PROHIBIDO usa circulo rojo con la P tachada.",
+    refSvg:null, refText:null
+  },
+  {
+    id:82, cat:"Normas",
+    q: "¿Es posible adelantar a un vehículo que está adelantando a otro?",
+    opts:["Sí, si hay espacio suficiente y visibilidad","No está prohibido, pero es una maniobra de triple adelantamiento extremadamente peligrosa y desaconsejada","Sí, si el primero va muy lento"],
+    ans:1,
+    explain:"El 'triple adelantamiento' (adelantar al que adelanta) no está explícitamente prohibido, pero es extremadamente peligroso porque requiere invadir el carril contrario cuando ya hay un vehículo adelantando. En la práctica, la visibilidad y el espacio rara vez lo permiten con seguridad.",
+    refSvg:null, refText:null
+  },
+  {
+    id:83, cat:"Normas",
+    q: "¿Puedes circular por el arcén de una autopista?",
+    opts:["Sí, si el tráfico es muy denso","No, el arcén es solo para paradas de emergencia y vehículos autorizados","Sí, si conduces una bicicleta"],
+    ans:1,
+    explain:"El arcén de autopistas y autovías está reservado exclusivamente para paradas de emergencia y para la circulación de vehículos autorizados (como grúas y policía). Circular por el arcén en marcha normal es una infracción muy grave con pérdida de 4 puntos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:84, cat:"Conducción Segura",
+    q: "¿Qué es la conducción defensiva?",
+    opts:["Conducir siempre al límite de velocidad máximo para no obstruir el tráfico","Conducir anticipando los errores de otros y las situaciones de riesgo, adoptando medidas preventivas","Conducir a velocidad reducida en todo momento"],
+    ans:1,
+    explain:"La conducción defensiva consiste en anticipar situaciones de riesgo (errores de otros conductores, peatones imprudentes, cambios de calzada), mantener distancias de seguridad amplias y adaptar la velocidad a las condiciones reales, no solo al límite señalizado.",
+    refSvg:null, refText:null
+  },
+  {
+    id:85, cat:"Normas",
+    q: "¿En qué posición deben viajar los niños menores de 135 cm de altura?",
+    opts:["En el asiento trasero con cinturón de adulto si ya tiene más de 3 años","En un sistema de retención infantil (SRI) homologado y adecuado a su talla y peso, en todo momento","Pueden viajar delante con airbag si tienen más de 8 años"],
+    ans:1,
+    explain:"Los menores de 135 cm deben usar siempre un SRI (silla, cuco, silla elevadora) homologado. No pueden ir en asiento delantero si hay airbag activo (salvo que el airbag esté desactivado y el SRI sea contra la marcha). El incumplimiento supone pérdida de 3 puntos y multa.",
+    refSvg:null, refText:null
+  },
+  {
+    id:86, cat:"Normas",
+    q: "¿Cuál es el límite de velocidad genérico en calles de plataforma única (zona de coexistencia)?",
+    opts:["30 km/h","20 km/h","10 km/h"],
+    ans:1,
+    explain:"En zonas de coexistencia (plataforma única donde comparten espacio peatones y vehículos, señalizado con S-28), el límite es 10-20 km/h. La señal de 'Zona 20' establece 20 km/h. Los peatones tienen prioridad absoluta.",
+    refSvg:null, refText:null
+  },
+  {
+    id:87, cat:"Mecánica",
+    q: "¿Qué significa el testigo ESP/ESC (control de estabilidad) parpadeando mientras conduces?",
+    opts:["El sistema está averiado: debes parar","El sistema está actuando: el coche está corrigiendo una situación de inestabilidad; mantén el volante firme y reduce velocidad","El sistema se ha desconectado automáticamente"],
+    ans:1,
+    explain:"Si el ESP parpadea mientras conduces, significa que el sistema está activamente compensando una pérdida de tracción o estabilidad (derrape, subviraje). Mantén el volante firme, no hagas correcciones bruscas y reduce la velocidad con suavidad.",
+    refSvg:null, refText:null
+  },
+  {
+    id:88, cat:"Normas",
+    q: "¿Cuántos puntos se pierden por no respetar un semáforo en rojo?",
+    opts:["2 puntos","4 puntos","6 puntos"],
+    ans:1,
+    explain:"Saltarse un semáforo en rojo supone la pérdida de 4 puntos del carnet y una multa de 200 euros. Es una infracción grave. Si hay accidente derivado, las consecuencias legales son mayores.",
+    refSvg:null, refText:null
+  },
+  {
+    id:89, cat:"Normas",
+    q: "¿Cuál es la tasa máxima de alcoholemia para conductores profesionales (transporte de personas o mercancías peligrosas)?",
+    opts:["0,25 mg/l en aire (igual que el general)","0,15 mg/l en aire espirado","0,10 mg/l en aire espirado"],
+    ans:1,
+    explain:"Los conductores profesionales (transporte de viajeros, mercancías peligrosas, camiones > 3.500 kg) tienen un límite más estricto: 0,15 mg/l en aire (0,3 g/l en sangre). El mismo límite aplica a los conductores noveles en período de prueba.",
+    refSvg:null, refText:null
+  },
+  {
+    id:90, cat:"Primeros Auxilios",
+    q: "¿Cuándo se aplica el torniquete en caso de hemorragia grave en una extremidad?",
+    opts:["Siempre que haya sangrado en una extremidad","Solo cuando la hemorragia es tan masiva que la presión directa no la controla y hay riesgo vital inmediato","Nunca: los torniquetes están contraindicados en primeros auxilios"],
+    ans:1,
+    explain:"El torniquete se aplica solo en hemorragias masivas en extremidades donde la presión directa no controla el sangrado y existe riesgo vital inmediato. Se aplica 5-10 cm por encima de la herida, se anota la hora y no se afloja hasta atención médica. En primeros auxilios básicos, la compresión directa es el primer paso.",
+    refSvg:null, refText:null
+  },
+  {
+    id:91, cat:"Normas",
+    q: "¿Puedes usar el carril VAO (Vehículo de Alta Ocupación) si viajas solo en tu turismo?",
+    opts:["Sí, si el carril está libre y circula a la velocidad establecida","No, el carril VAO exige un mínimo de 2 o 3 ocupantes (según lo indicado en la señal) o ser vehículo de bajas emisiones autorizado","Sí, en horas valle (fuera de la hora punta)"],
+    ans:1,
+    explain:"El carril VAO requiere el número mínimo de ocupantes indicado en la señal (normalmente ≥2 personas) o ser un vehículo con etiqueta 0 o ECO. Circular solo en el VAO sin autorización es una infracción grave.",
+    refSvg:null, refText:null
+  },
+  {
+    id:92, cat:"Señales",
+    q: "¿Qué indica una señal triangular con un semáforo en su interior?",
+    opts:["Semáforo a distancia: debes prepararte para posibles indicaciones luminosas próximas","Semáforo averiado","Intersección regulada obligatoriamente por semáforo"],
+    ans:0,
+    explain:"La señal P-29 (triángulo con semáforo) advierte de que próximamente habrá un semáforo. Es una señal de peligro/advertencia. Debes prepararte para que en breve el tráfico pueda estar regulado por semáforo.",
+    refSvg:null, refText:null
+  },
+  {
+    id:93, cat:"Conducción Segura",
+    q: "¿Cuánto aumenta la distancia de frenado con la calzada mojada respecto a la seca?",
+    opts:["Un 10-15% más","Entre un 30-50% más","El doble o más"],
+    ans:1,
+    explain:"En calzada mojada, la distancia de frenado aumenta entre un 30-50% respecto a la calzada seca. A 90 km/h esto puede suponer entre 15-30 metros adicionales. Con calzada con hielo o nieve, la distancia puede multiplicarse por 5-10.",
+    refSvg:null, refText:null
+  },
+  {
+    id:94, cat:"Normas",
+    q: "¿Qué velocidad máxima se aplica a las ciclomotores en autopista?",
+    opts:["90 km/h","Los ciclomotores no pueden circular por autopistas ni autovías","70 km/h"],
+    ans:1,
+    explain:"Los ciclomotores (hasta 50 cc, máximo 45 km/h) NO pueden circular por autopistas, autovías, vías expresas ni carreteras convencionales en general (solo pueden usar las carreteras locales y urbanas donde se les autorice). En las autopistas están totalmente prohibidos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:95, cat:"Normas",
+    q: "¿Qué señal tiene prioridad: la señal vertical o la marca horizontal?",
+    opts:["Siempre la señal vertical","Depende: en general las señales temporales y de los agentes de tráfico prevalecen; entre señales fijas, la señal vertical suele prevalecer","Siempre la marca horizontal"],
+    ans:1,
+    explain:"Orden de prioridad: 1) Agentes de tráfico. 2) Señales circunstanciales/temporales. 3) Semáforos. 4) Señales verticales permanentes. 5) Marcas viales. Una señal vertical fija tiene preferencia sobre la marca vial, pero un cono o agente prevalece sobre todos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:96, cat:"Mecánica",
+    q: "¿Con qué frecuencia se recomienda revisar el nivel de aceite del motor?",
+    opts:["Solo en cada ITV","Mensualmente o cada 1.000 km, y siempre antes de viajes largos","Solo cuando el testigo de aceite se encienda"],
+    ans:1,
+    explain:"Se recomienda revisar el nivel de aceite mensualmente o cada 1.000 km aproximadamente. El aceite se comprueba en frío con el dipstick (varilla): el nivel debe estar entre las marcas mínimo y máximo. Un motor sin aceite suficiente puede sufrir daños irreversibles en minutos.",
+    refSvg:null, refText:null
+  },
+  {
+    id:97, cat:"Normas",
+    q: "¿Puedes viajar con un perro sin ninguna sujeción en el asiento trasero del coche?",
+    opts:["Sí, en el asiento trasero los animales no necesitan sujeción","No, los animales deben viajar en transportín, con arnés homologado o separados del habitáculo por una rejilla","Solo si el perro pesa menos de 10 kg"],
+    ans:1,
+    explain:"Los animales deben ir sujetos durante el viaje: en transportín homologado, con arnés de seguridad para animales abrochado al cinturón, o separados del habitáculo por una rejilla o malla. Un animal suelto puede convertirse en proyectil en caso de frenada brusca y distrae al conductor.",
+    refSvg:null, refText:null
+  },
+  {
+    id:98, cat:"Normas",
+    q: "¿Es obligatorio llevar gafas de repuesto en el vehículo si tu permiso indica que debes conducir con corrección visual?",
+    opts:["No, no existe esa obligación legal","Sí, si en tu permiso consta la restricción '01' (corrección de visión), debes llevar unas gafas de repuesto","Solo en carretera, no en ciudad"],
+    ans:1,
+    explain:"Si en tu permiso figura la restricción 01 (uso obligatorio de gafas o lentillas), estás obligado a llevar siempre las gafas puestas al conducir Y llevar unas de repuesto en el vehículo. Conducir sin la corrección visual indicada es una infracción.",
+    refSvg:null, refText:null
+  },
+  {
+    id:99, cat:"Conducción Segura",
+    q: "¿Cuáles son los síntomas físicos principales que indican que debes parar a descansar?",
+    opts:["Sensación de hambre y sed","Ojos que pican, bostezos frecuentes, dificultad para mantener el carril, y velocidad irregular","Solo el sueño repentino"],
+    ans:1,
+    explain:"Los síntomas de fatiga al volante son: ojos irritados o que se cierran, bostezos frecuentes, pérdida de concentración, dificultad para mantener la posición en el carril, velocidad irregular y reacciones tardías. Ante cualquiera de estos síntomas, debes parar a descansar.",
+    refSvg:null, refText:null
+  },
+  {
+    id:100, cat:"Señales",
+    q: "¿Qué indica la señal rectangular verde en autopista con el número de la salida y el nombre de una ciudad?",
+    opts:["Una señal de peligro por salida próxima","Una señal informativa de salida de autopista/autovía","Una señal de obras por desvío obligatorio"],
+    ans:1,
+    explain:"Las señales rectangulares verdes en autopistas/autovías son señales informativas (tipo S). Indican salidas, destinos y servicios. El verde es el color estándar para autopistas/autovías. Las carreteras convencionales usan fondo blanco o azul para sus señales informativas.",
+    refSvg:null, refText:null
+  },
+];
+
+// ══════════════════════════════════════════════════
+//   ESTADO DE LA APP
+// ══════════════════════════════════════════════════
+// ══════════════════════════════════════════════════
+//   ESTADO DE LA APP
+// ══════════════════════════════════════════════════
+let currentMode = 'exam';
+let currentType = 'full';
+let examQuestions = [];
+let currentIndex = 0;
+let correctCount = 0;
+let wrongCount = 0;
+let skippedCount = 0;
+let currentSelectedOptionIndex = null; // Renombrado para evitar confusión con la función selectOption
+let answered = false;
+let timer = null;
+let timeLeft = 30 * 60;
+let timeUsed = 0;
+let maxStreak = 0;
+let currentStreak = 0;
+let userAnswers = [];
+
+// ── Init ──────────────────────────────────────────
+window.addEventListener('load', function() {
+  Log.info("Aplicación cargada correctamente.");
+  var bankCountEl = document.getElementById('bank-count');
+  if (bankCountEl) {
+    bankCountEl.textContent = QUESTIONS.length + ' preguntas';
+    Log.info(`Banco de preguntas inicializado con ${QUESTIONS.length} preguntas.`);
+  }
+});
+
+function selectMode(mode) {
+  Log.info(`Cambiando modo a: ${mode}`);
+  currentMode = mode;
+  var modes = document.querySelectorAll('.mode-card');
+  Array.prototype.forEach.call(modes, function(c) { c.classList.remove('selected'); });
+  var sel = document.querySelector('[data-mode="' + mode + '"]');
+  if (sel) sel.classList.add('selected');
+}
+
+function selectType(type, btn) {
+  Log.info(`Cambiando tipo de examen a: ${type}`);
+  currentType = type;
+  var btns = document.querySelectorAll('.exam-type-btn');
+  Array.prototype.forEach.call(btns, function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
+function shuffle(arr) {
+  Log.info("Barajando preguntas...");
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getFilteredQuestions() {
+  Log.info(`Filtrando preguntas para tipo: ${currentType}`);
+  const catMap = {
+    full: null,
+    signals: ['Señales'],
+    normas: ['Normas', 'Percepción del Riesgo'],
+    mecanica: ['Mecánica'],
+    alcohol: ['Alcohol/Drogas']
+  };
+  const cats = catMap[currentType];
+  let pool = cats ? QUESTIONS.filter(q => cats.includes(q.cat)) : QUESTIONS;
+  
+  if (pool.length === 0) {
+    Log.warn("No se encontraron preguntas para la categoría seleccionada, usando banco completo.");
+    pool = QUESTIONS;
+  }
+
+  if (pool.length < 30) {
+    Log.info("Completando pool de preguntas hasta 30...");
+    pool = [...pool, ...QUESTIONS].slice(0, 60);
+  }
+  
+  const result = shuffle(pool).slice(0, 30);
+  Log.info(`Preguntas seleccionadas: ${result.length}`);
+  return result;
+}
+
+// ── START ─────────────────────────────────────────
+function startExam() {
+  Log.info("Iniciando examen...");
+  try {
+    examQuestions = getFilteredQuestions();
+    if (!examQuestions || examQuestions.length === 0) {
+      throw new Error("No se pudieron cargar las preguntas del examen.");
+    }
+
+    currentIndex = 0;
+    correctCount = 0;
+    wrongCount = 0;
+    skippedCount = 0;
+    timeLeft = 30 * 60;
+    timeUsed = 0;
+    maxStreak = 0;
+    currentStreak = 0;
+    userAnswers = new Array(30).fill(null).map(() => ({ selected: null, answered: false, skipped: false }));
+
+    showScreen('screen-exam');
+    renderQuestion();
+
+    clearInterval(timer);
+    if (currentMode === 'exam') {
+      timer = setInterval(tickTimer, 1000);
+      Log.info("Temporizador iniciado (modo examen).");
+    } else {
+      const timerPill = document.getElementById('timer-pill');
+      if (timerPill) timerPill.style.display = 'none';
+      Log.info("Modo tutor: sin temporizador.");
+    }
+  } catch (err) {
+    Log.error("Error al iniciar el examen", err);
+    alert("Hubo un error al iniciar el examen. Por favor, revisa la consola.");
+  }
+}
+
+function tickTimer() {
+  if (timeLeft <= 0) {
+    Log.info("Tiempo agotado.");
+    clearInterval(timer);
+    showResults();
+    return;
+  }
+  
+  timeLeft--;
+  timeUsed++;
+  const m = Math.floor(timeLeft / 60);
+  const s = timeLeft % 60;
+  
+  const display = document.getElementById('timer-display');
+  if (display) {
+    display.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+  
+  const pill = document.getElementById('timer-pill');
+  if (pill) {
+    if (timeLeft <= 120) pill.classList.add('urgent');
+    else pill.classList.remove('urgent');
+  }
+}
+
+// ── RENDER QUESTION ───────────────────────────────
+function renderQuestion() {
+  Log.info(`Renderizando pregunta índice: ${currentIndex}`);
+  const q = examQuestions[currentIndex];
+  const state = userAnswers[currentIndex];
+  
+  if (!q) {
+    Log.error(`Pregunta no encontrada en el índice ${currentIndex}`);
+    return;
+  }
+
+  answered = state.answered;
+  currentSelectedOptionIndex = state.selected;
+
+  document.getElementById('q-current').textContent = currentIndex + 1;
+  document.getElementById('q-label').textContent = `Pregunta ${currentIndex + 1}`;
+  document.getElementById('q-cat').textContent = q.cat;
+  document.getElementById('progress-fill').style.width = ((currentIndex + 1) / 30 * 100) + '%';
+  document.getElementById('correct-count').textContent = correctCount;
+  document.getElementById('wrong-count').textContent = wrongCount;
+
+  const imgWrap = document.getElementById('q-image-wrap');
+  const imgContent = document.getElementById('q-image');
+  const imgCaption = document.getElementById('q-image-caption');
+  
+  if (q.img) {
+    imgWrap.style.display = 'block';
+    imgContent.innerHTML = q.img;
+    imgCaption.textContent = q.cat === 'Señales' ? '↑ Señal del examen' : '';
+  } else {
+    imgWrap.style.display = 'none';
+  }
+
+  document.getElementById('q-text').textContent = q.q;
+
+  const optList = document.getElementById('options-list');
+  const letters = ['A', 'B', 'C'];
+  optList.innerHTML = '';
+  
+  q.opts.forEach((opt, i) => {
+    const el = document.createElement('div');
+    el.className = 'option';
+    el.innerHTML = `<div class="opt-letter">${letters[i]}</div><div class="opt-text">${opt}</div>`;
+    
+    if (answered) {
+      el.classList.add('disabled');
+      if (i === q.ans) el.classList.add('correct');
+      if (i === state.selected && i !== q.ans) el.classList.add('wrong');
+    } else {
+      if (i === currentSelectedOptionIndex) el.classList.add('selected');
+      el.onclick = () => selectOption(i, el);
+    }
+    optList.appendChild(el);
+  });
+
+  const fb = document.getElementById('feedback-box');
+  if (answered) {
+    showFeedback(q, state);
+  } else {
+    fb.style.display = 'none';
+  }
+
+  const btnConfirm = document.getElementById('btn-confirm');
+  const btnNext = document.getElementById('btn-next');
+  const btnSkip = document.getElementById('btn-skip');
+
+  btnConfirm.disabled = currentSelectedOptionIndex === null;
+  btnConfirm.style.display = answered ? 'none' : '';
+  btnNext.style.display = answered ? '' : 'none';
+  btnSkip.style.display = answered ? 'none' : '';
+}
+
+function selectOption(i, el) {
+  if (answered) return;
+  Log.info(`Opción seleccionada: ${i}`);
+  currentSelectedOptionIndex = i;
+  var opts = document.querySelectorAll('.option');
+  Array.prototype.forEach.call(opts, function(o) { o.classList.remove('selected'); });
+  el.classList.add('selected');
+  document.getElementById('btn-confirm').disabled = false;
+}
+
+function confirmAnswer() {
+  if (currentSelectedOptionIndex === null || answered) {
+    Log.warn("Intento de confirmar sin selección o ya respondida.");
+    return;
+  }
+  
+  Log.info("Confirmando respuesta...");
+  answered = true;
+  const q = examQuestions[currentIndex];
+  const isCorrect = currentSelectedOptionIndex === q.ans;
+  
+  userAnswers[currentIndex].selected = currentSelectedOptionIndex;
+  userAnswers[currentIndex].answered = true;
+
+  if (isCorrect) {
+    Log.info("¡Correcto!");
+    correctCount++;
+    currentStreak++;
+    if (currentStreak > maxStreak) maxStreak = currentStreak;
+  } else {
+    Log.info(`Incorrecto. Era la opción: ${q.ans}`);
+    wrongCount++;
+    currentStreak = 0;
+  }
+  
+  document.getElementById('correct-count').textContent = correctCount;
+  document.getElementById('wrong-count').textContent = wrongCount;
+
+  // Actualizar UI de opciones
+  var optEls = document.querySelectorAll('.option');
+  Array.prototype.forEach.call(optEls, function(el, i) {
+    el.classList.add('disabled');
+    el.onclick = null;
+    if (i === q.ans) el.classList.add('correct');
+    if (i === currentSelectedOptionIndex && !isCorrect) el.classList.add('wrong');
+  });
+
+  showFeedback(q, { selected: currentSelectedOptionIndex, answered: true });
+
+  document.getElementById('btn-confirm').style.display = 'none';
+  document.getElementById('btn-skip').style.display = 'none';
+  document.getElementById('btn-next').style.display = '';
+
+  if (wrongCount >= 4 && currentMode === 'exam') { // DGT permite hasta 3 fallos, a partir de 4 suspendes
+    Log.info("Límite de fallos alcanzado en modo examen.");
+    clearInterval(timer);
+    setTimeout(() => showResults(), 1400);
+  }
+}
+
+function showFeedback(q, state) {
+  const fb = document.getElementById('feedback-box');
+  const isCorrect = state.selected === q.ans;
+
+  fb.className = 'feedback-box ' + (isCorrect ? 'correct' : 'wrong');
+  fb.style.display = 'block';
+
+  const fbTitle = document.getElementById('fb-title');
+  const fbText = document.getElementById('fb-text');
+  const fbRef = document.getElementById('fb-ref-image');
+
+  if (isCorrect) {
+    fbTitle.innerHTML = '✅ ¡Correcto!';
+  } else {
+    const letters = ['A', 'B', 'C'];
+    const correctLetter = letters[q.ans];
+    fbTitle.innerHTML = `❌ Incorrecto — La respuesta correcta era <strong>${correctLetter})</strong>`;
+  }
+
+  const modePrefix = currentMode === 'tutor' ? '📖 <strong>Explicación:</strong> ' : '💡 <strong>¿Por qué?</strong> ';
+  fbText.innerHTML = modePrefix + q.explain;
+
+  if (!isCorrect && q.refSvg) {
+    fbRef.style.display = 'block';
+    document.getElementById('fb-ref-svg').innerHTML = q.refSvg;
+    document.getElementById('fb-ref-text').innerHTML = q.refText || '';
+  } else {
+    fbRef.style.display = 'none';
+  }
+}
+
+function skipQuestion() {
+  Log.info(`Saltando pregunta ${currentIndex + 1}`);
+  userAnswers[currentIndex].skipped = true;
+  userAnswers[currentIndex].answered = false;
+  skippedCount++;
+  currentStreak = 0;
+  nextQuestion();
+}
+
+function nextQuestion() {
+  if (currentIndex < 29) {
+    Log.info("Pasando a la siguiente pregunta.");
+    currentIndex++;
+    currentSelectedOptionIndex = null;
+    answered = false;
+    renderQuestion();
+  } else {
+    Log.info("Fin del examen alcanzado.");
+    clearInterval(timer);
+    showResults();
+  }
+}
+
+function abandonExam() {
+  if (confirm('¿Seguro que quieres abandonar el examen?')) {
+    Log.info("Examen abandonado por el usuario.");
+    clearInterval(timer);
+    showResults();
+  }
+}
+
+// ── RESULTS ───────────────────────────────────────
+function showResults() {
+  Log.info("Calculando resultados...");
+  clearInterval(timer);
+  const total = currentIndex + 1;
+  const passLimit = 3; // Máximo 3 fallos
+  const passPure = wrongCount <= passLimit;
+  const pct = Math.round((correctCount / total) * 100);
+
+  const resBadge = document.getElementById('res-badge');
+  const resTitle = document.getElementById('res-title');
+  const resSubtitle = document.getElementById('res-subtitle');
+
+  resBadge.textContent = passPure ? '🎉' : '😢';
+  resBadge.className = 'result-badge ' + (passPure ? 'pass' : 'fail');
+  resTitle.textContent = passPure ? 'APROBADO' : 'SUSPENDIDO';
+  resTitle.className = 'result-title ' + (passPure ? 'pass' : 'fail');
+
+  const subtitle = passPure
+    ? `Has superado el examen con ${correctCount} aciertos y solo ${wrongCount} fallo${wrongCount !== 1 ? 's' : ''}. ¡Enhorabuena!`
+    : `Has superado el límite de 3 fallos (${wrongCount} errores). Repasa los errores y vuelve a intentarlo.`;
+  resSubtitle.textContent = subtitle;
+
+  document.getElementById('rs-correct').textContent = correctCount;
+  document.getElementById('rs-wrong').textContent = wrongCount;
+  document.getElementById('rs-skipped').textContent = skippedCount;
+  document.getElementById('rs-pct').textContent = pct + '%';
+  
+  const tu = currentMode === 'exam' ? (30 * 60 - timeLeft) : timeUsed;
+  const tm = Math.floor(tu / 60);
+  const ts = tu % 60;
+  document.getElementById('rs-time').textContent = `${String(tm).padStart(2,'0')}:${String(ts).padStart(2,'0')}`;
+  document.getElementById('rs-streak').textContent = maxStreak;
+
+  // Review
+  Log.info("Generando sección de repaso...");
+  const reviewList = document.getElementById('review-list');
+  reviewList.innerHTML = '';
+  const letters = ['A', 'B', 'C'];
+
+  let hasReview = false;
+  examQuestions.forEach((q, i) => {
+    const ua = userAnswers[i];
+    if (ua && (!ua.answered || ua.selected !== q.ans)) {
+      hasReview = true;
+      const div = document.createElement('div');
+      div.className = 'review-item' + (ua.skipped ? ' skipped' : '');
+      const yourAns = ua.skipped ? 'Sin contestar' : (ua.selected !== null ? `${letters[ua.selected]}) ${q.opts[ua.selected]}` : 'Sin contestar');
+      div.innerHTML = `
+        <div class="ri-question">P${i+1}: ${q.q}</div>
+        <div class="ri-your">❌ Tu respuesta: ${yourAns}</div>
+        <div class="ri-correct">✅ Correcta: ${letters[q.ans]}) ${q.opts[q.ans]}</div>
+        <div class="ri-explain">💡 ${q.explain}</div>
+      `;
+      reviewList.appendChild(div);
+    }
+  });
+
+  if (!hasReview) {
+    reviewList.innerHTML = '<p style="color:#1a8a3c;font-weight:600;text-align:center;padding:20px">🎯 ¡Excelente! No hubo ningún error.</p>';
+  }
+
+  showScreen('screen-results');
+}
+
+// ── NAVIGATION ────────────────────────────────────
+function showScreen(id) {
+  Log.info(`Cambiando a pantalla: ${id}`);
+  var screens = document.querySelectorAll('.screen');
+  Array.prototype.forEach.call(screens, function(s) { s.classList.remove('active'); });
+  var target = document.getElementById(id);
+  if (target) {
+    target.classList.add('active');
+  } else {
+    Log.error(`Pantalla no encontrada: ${id}`);
+  }
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  Log.info("Volviendo al inicio.");
+  clearInterval(timer);
+  showScreen('screen-home');
+  const timerPill = document.getElementById('timer-pill');
+  if (timerPill) {
+    timerPill.style.display = '';
+    timerPill.classList.remove('urgent');
+  }
+  const timerDisplay = document.getElementById('timer-display');
+  if (timerDisplay) timerDisplay.textContent = '30:00';
+}
+
+</script>
+</body>
+</html>
